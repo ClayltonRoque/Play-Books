@@ -1,31 +1,22 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #ff0000;
-$primary-light: findLightColor($primary);
-$primary-dark: findDarkColor($primary);
-$primary-invert: findColorInvert($primary);
-$twitter: #4099ff;
-$twitter-invert: findColorInvert($twitter);
-
-$amazonia: #008000;
-$amazonia-invert: findColorInvert($amazonia);
+$primary: #112131;
+$secondary: #071422;
 
 // Lists and maps
 $custom-colors: (
   "primary": (
     $primary,
-    $primary-invert,
-    $primary-light,
-    $primary-dark,
+    findLightColor($primary),
+    findDarkColor($primary),
+    findColorInvert($primary),
   ),
-  "twitter": (
-    $twitter,
-    $twitter-invert,
-  ),
-  "amazonia": (
-    $amazonia,
-    $amazonia-invert,
+  "secondary": (
+    $secondary,
+    findLightColor($secondary),
+    findDarkColor($secondary),
+    findColorInvert($secondary),
   ),
 ) !default;
 
