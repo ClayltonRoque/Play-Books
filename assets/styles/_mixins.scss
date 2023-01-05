@@ -1,0 +1,21 @@
+@mixin font-primary {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+@mixin font-secondary {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+@mixin font-primary-extrabold {
+  @include font-primary;
+}
+
+@mixin title-amazonia {
+  color: $amazonia;
+  font-weight: 900;
+  text-decoration: line-through;
+}
+
+@mixin gotic {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
