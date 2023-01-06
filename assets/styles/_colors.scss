@@ -70,17 +70,17 @@ $custom-colors: (
     findDarkColor($base-border),
     findColorInvert($base-border),
   ),
+  "base-post": (
+    $base-post,
+    findLightColor($base-post),
+    findDarkColor($base-post),
+    findColorInvert($base-post),
+  ),
   "base-profile": (
     $base-profile,
     findLightColor($base-profile),
     findDarkColor($base-profile),
     findColorInvert($base-profile),
-  ),
-  "brand-blue-white": (
-    $brand-blue-white,
-    findLightColor($brand-blue-white),
-    findDarkColor($brand-blue-white),
-    findColorInvert($brand-blue-white),
   ),
   "base-background": (
     $base-background,
