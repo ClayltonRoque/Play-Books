@@ -18,6 +18,7 @@
     "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
+    "@iconify/vue": "^4.0.2",
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "sass": "^1.57.1"
