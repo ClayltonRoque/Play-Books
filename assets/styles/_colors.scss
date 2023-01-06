@@ -1,22 +1,92 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #112131;
-$secondary: #071422;
+$brand-blue: #00acee;
+$brand-blue-white: #11bdff;
+$brand-red: #db0d15;
+$base-title: #e7edf4;
+$base-subtitle: #c4d4e3;
+$base-text: #afc2d4;
+$base-span: #7b96b2;
+$base-label: #3a536b;
+$base-border: #1c2f41;
+$base-post: #112131;
+$base-profile: #0b1b2b;
+$base-background: #071422;
 
 // Lists and maps
 $custom-colors: (
-  "primary": (
-    $primary,
-    findLightColor($primary),
-    findDarkColor($primary),
-    findColorInvert($primary),
+  "brand-blue": (
+    $brand-blue,
+    findLightColor($brand-blue),
+    findDarkColor($brand-blue),
+    findColorInvert($brand-blue),
   ),
-  "secondary": (
-    $secondary,
-    findLightColor($secondary),
-    findDarkColor($secondary),
-    findColorInvert($secondary),
+  "brand-blue-white": (
+    $brand-blue-white,
+    findLightColor($brand-blue-white),
+    findDarkColor($brand-blue-white),
+    findColorInvert($brand-blue-white),
+  ),
+  "brand-red": (
+    $brand-red,
+    findLightColor($brand-red),
+    findDarkColor($brand-red),
+    findColorInvert($brand-red),
+  ),
+  "base-title": (
+    $base-title,
+    findLightColor($base-title),
+    findDarkColor($base-title),
+    findColorInvert($base-title),
+  ),
+  "base-subtitle": (
+    $base-subtitle,
+    findLightColor($base-subtitle),
+    findDarkColor($base-subtitle),
+    findColorInvert($base-subtitle),
+  ),
+  "base-text": (
+    $base-text,
+    findLightColor($base-text),
+    findDarkColor($base-text),
+    findColorInvert($base-text),
+  ),
+  "base-span": (
+    $base-span,
+    findLightColor($base-span),
+    findDarkColor($base-span),
+    findColorInvert($base-span),
+  ),
+  "base-label": (
+    $base-label,
+    findLightColor($base-label),
+    findDarkColor($base-label),
+    findColorInvert($base-label),
+  ),
+  "base-border": (
+    $base-border,
+    findLightColor($base-border),
+    findDarkColor($base-border),
+    findColorInvert($base-border),
+  ),
+  "base-profile": (
+    $base-profile,
+    findLightColor($base-profile),
+    findDarkColor($base-profile),
+    findColorInvert($base-profile),
+  ),
+  "brand-blue-white": (
+    $brand-blue-white,
+    findLightColor($brand-blue-white),
+    findDarkColor($brand-blue-white),
+    findColorInvert($brand-blue-white),
+  ),
+  "base-background": (
+    $base-background,
+    findLightColor($base-background),
+    findDarkColor($base-background),
+    findColorInvert($base-background),
   ),
 ) !default;
 
