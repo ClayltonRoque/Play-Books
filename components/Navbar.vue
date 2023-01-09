@@ -1,36 +1,46 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="../assets/play-books-logo.png" width="112" height="28" />
-      </a>
+    <div class="container">
+      <div class="navbar-brand" style="flex: 1">
+        <a class="navbar-item" href="https://bulma.io">
+          <img
+            src="https://bulma.io/images/bulma-logo.png"
+            width="112"
+            height="28"
+          />
+        </a>
 
-      <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+        <div
+          class="control"
+          style="display: flex; width: 100%; justify-content: center"
+        >
+          <input
+            class="input my-4 is-medium"
+            type="text"
+            placeholder="Pesquisar livros"
+            style="max-width: 75%; margin: 0 auto"
+          />
+        </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <input
-          class="input is-primary navbar-item"
-          type="text"
-          placeholder="Primary input"
-        />
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <div class="navbar-end">
-        <a class="navbar-item"> Home </a>
+      <div id="navbarBasicExample" class="navbar-menu" style="flex-grow: 0">
+        <div class="navbar-end">
+          <Nuxt-link to="/" class="navbar-item"> Home </Nuxt-link>
 
-        <a class="navbar-item"> Documentation </a>
+          <Nuxt-link to="/favorites" class="navbar-item"> Favoritos </Nuxt-link>
+        </div>
       </div>
     </div>
   </nav>
