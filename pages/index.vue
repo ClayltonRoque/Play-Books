@@ -1,12 +1,9 @@
-<template></template>
+<template>
+  <div>
+    <button></button>
+  </div>
+</template>
 
-<script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
-
-export default defineComponent({
-  name: "Home",
-  components: {},
-});
-</script>
+<script lang="ts"></script>
 
 <style lang="scss" scoped></style>

@@ -9,19 +9,12 @@
             height="28"
           />
         </a>
-
         <div
           class="control"
           style="display: flex; width: 100%; justify-content: center"
         >
-          <input
-            class="input my-4 is-medium"
-            type="text"
-            placeholder="Pesquisar livros"
-            style="max-width: 75%; margin: 0 auto"
-          />
+          <Search />
         </div>
-
         <a
           role="button"
           class="navbar-burger"
@@ -48,9 +41,12 @@
 
 <script lang="ts">
 import { defineComponent } from "@nuxtjs/composition-api";
+import Search from "~/components/Search.vue";
 
 export default defineComponent({
-  name: "Navbar",
+  name: "playBookNavBar",
+  components: { Search },
+  setup() {},
 });
 </script>
 
