@@ -1,18 +1,20 @@
 <template>
   <div>
-    <Navbar />
+    <PlayBookNavBar />
     <Nuxt />
   </div>
 </template>
 
+<
 <script lang="ts">
 import { defineComponent } from "@nuxtjs/composition-api";
-import Navbar from "../components/Navbar.vue";
+import PlayBookNavBar from "~/components/Navbar.vue";
 
 export default defineComponent({
-  name: "Home",
   components: {
-    Navbar,
+    PlayBookNavBar,
   },
 });
 </script>
+
+<style lang="scss" scoped></style>

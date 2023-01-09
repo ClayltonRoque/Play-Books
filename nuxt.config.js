@@ -27,6 +27,10 @@ export default {
     css: false,
   },
 
+  axios: {
+    baseUrl: "https://www.googleapis.com/books/v1",
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
@@ -39,6 +43,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     "nuxt-buefy",
+    "@nuxtjs/axios",
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
