@@ -1,15 +1,25 @@
 declare module BookDocument {
-  export interface Document {
-    id: string;
-    preview: string;
-    title: string;
-    img: string;
-    author: string;
-    editora: string;
-    categoria: string;
-    idioma: string;
-    publicado: string;
-    paginas: string;
-    subTitle: string;
-  }
+export interface IBooks {
+  imageLinks: {
+    thumbnail: string;
+    smallThumbnail: string;
+  };
+  previewLink: string;
+  title: string;
+  authors: string | string[];
+  publisher: string;
+  categories: string[];
+  language: string;
+  publishedDate: string;
+  pageCount: number;
+  description: string;
+}
+
+export interface Volume {
+  id: string;
+  searchInfo?: {
+    textSnippet?: string;
+  };
+  volumeInfo: IBooks;
+}
 }

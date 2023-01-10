@@ -1,11 +1,11 @@
-import { useContext, ref } from "@nuxtjs/composition-api";
+import { useContext, reactive } from "@nuxtjs/composition-api";
 
 export function useBookData() {
   const nuxtContext = useContext();
   const index = 0;
   const apiKey = "AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU";
   const defaultMaxResults = "20";
-  const state = ref({
+  const state = reactive({
     books: [],
     query: "",
   });
@@ -13,19 +13,14 @@ export function useBookData() {
     try {
       const data = await nuxtContext.$axios.$get("volumes", {
         params: {
-          q: state.value.query,
+          q: state.query,
           key: apiKey,
           maxResults: defaultMaxResults,
           startIndex: index,
         },
       });
-      state.value.books = data;
-      console.log(state.value.query);
-      console.log(
-        data.items.map((item: any) => {
-          return item.volumeInfo;
-        })
-      );
+      console.log(data.items);
+      state.books = data;
     } catch (error) {
       console.log("Não foi possível buscar informações com o servidor");
     }

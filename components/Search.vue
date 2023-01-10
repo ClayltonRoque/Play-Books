@@ -1,36 +1,45 @@
 <template>
   <div class="play-book-search">
-    <input
-      class="input"
-      type="text"
-      placeholder="Pesquisar livros"
-      v-model="state.query"
-    />
-    <button @click="getDataBooks">click</button>
+    <form @submit.prevent="submit">
+      <input
+        class="input"
+        type="text"
+        placeholder="Pesquisar livros"
+        v-model="state.query"
+      />
+    </form>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent, useStore } from "@nuxtjs/composition-api";
+
 import { useBookData } from "~/service/bookData";
+
+import { StateProps as StateBook } from "~/store/bookData";
+
+export interface StateProps {
+  bookData: StateBook;
+}
 
 export default defineComponent({
   name: "playBookSearch",
-  model: {
-    prop: "query",
-    event: "input",
-  },
-  setup(_props, context) {
-    function input(event: any) {
-      const text = event.target.value;
-      context.emit("input", text);
-      text.length > 3 && context.emit("submit", true);
-    }
+  setup() {
     const { state, getDataBooks } = useBookData();
 
+    const store = useStore<StateProps>();
+
+    async function submit() {
+      await getDataBooks();
+      const submitBook = {
+        ...state.books,
+      };
+      store.commit("bookData/SAVE_BOOKS", submitBook);
+    }
+
     return {
-      input,
       state,
       getDataBooks,
+      submit,
     };
   },
 });
