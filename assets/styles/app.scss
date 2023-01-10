@@ -3,4 +3,19 @@
 
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
-@import "base/base.scss";
+
+html {
+  background-color: $base-background;
+  &::-webkit-scrollbar {
+    width: 0.500rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $base-border;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $brand-blue;
+    border-radius: 999px;
+  }
+}
