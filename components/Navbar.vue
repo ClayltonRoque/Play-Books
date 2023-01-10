@@ -9,10 +9,7 @@
             height="28"
           />
         </a>
-        <div
-          class="control"
-          style="display: flex; width: 100%; justify-content: center"
-        >
+        <div style="display: flex; width: 100%; justify-content: center">
           <Search />
         </div>
         <a
@@ -41,7 +38,7 @@
 
 <script lang="ts">
 import { defineComponent } from "@nuxtjs/composition-api";
-import Search from "~/components/Search.vue";
+import Search from "../components/Search.vue";
 
 export default defineComponent({
   name: "playBookNavBar",
