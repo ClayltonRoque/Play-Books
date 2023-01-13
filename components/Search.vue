@@ -11,29 +11,21 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, useStore } from "@nuxtjs/composition-api";
+import { defineComponent, reactive } from "@nuxtjs/composition-api";
 
 import { useBookData } from "~/service/bookData";
-
-import { StateProps as StateBook } from "~/store/bookData";
-
-export interface StateProps {
-  bookData: StateBook;
-}
 
 export default defineComponent({
   name: "playBookSearch",
   setup() {
-    const { state, getDataBooks } = useBookData();
+    const { getDataBooks } = useBookData();
 
-    const store = useStore<StateProps>();
+    const state = reactive({
+      query: "",
+    });
 
     async function submit() {
-      await getDataBooks();
-      const submitBook = {
-        ...state.books,
-      };
-      store.commit("bookData/SAVE_BOOKS", submitBook);
+      await getDataBooks(state.query);
     }
 
     return {
