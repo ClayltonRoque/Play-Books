@@ -5,20 +5,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useStore, computed } from "@nuxtjs/composition-api";
+import { defineComponent } from "@nuxtjs/composition-api";
 
-import { StateProps as StateBook } from "~/store/bookData";
-
-export interface StateProps {
-  bookData: StateBook;
-}
+import { useBookData } from "~/service/bookData";
 
 export default defineComponent({
   setup() {
-    const store = useStore<StateProps>();
-    const storeBooks = computed(() => {
-      return store.state.bookData.books;
-    });
+    const { storeBooks } = useBookData();
     return {
       storeBooks,
     };
