@@ -1,15 +1,33 @@
-import { useContext, reactive } from "@nuxtjs/composition-api";
+import {
+  useContext,
+  reactive,
+  useStore,
+  computed,
+} from "@nuxtjs/composition-api";
+import { StateProps as StateBook } from "~/store/bookData";
+export interface StateProps {
+  bookData: StateBook;
+}
 
 export function useBookData() {
   const nuxtContext = useContext();
-  const index = 0;
-  const apiKey = "AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU";
-  const defaultMaxResults = "20";
+
   const state = reactive({
     books: [],
     query: "",
   });
+
+  const store = useStore<StateProps>();
+
+  const storeBooks = computed(() => {
+    return store.state.bookData.books;
+  });
+
   async function getDataBooks() {
+    const index = 0;
+    const apiKey = "AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU";
+    const defaultMaxResults = "20";
+
     try {
       const data = await nuxtContext.$axios.$get("volumes", {
         params: {
@@ -19,7 +37,6 @@ export function useBookData() {
           startIndex: index,
         },
       });
-      console.log(data.items);
       state.books = data;
     } catch (error) {
       console.log("Não foi possível buscar informações com o servidor");
@@ -29,5 +46,6 @@ export function useBookData() {
   return {
     state,
     getDataBooks,
+    storeBooks,
   };
 }
