@@ -1,5 +1,5 @@
 <template>
-  <section class="play-books-details container" style="top: 86px;">
+  <section class="play-books-details container">
     <div class="py-5">
       <p class="has-text-base-title">Meu Id: {{ $route.params.id }}</p>
     </div>
@@ -16,4 +16,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.play-books-details {
+  top: 86px;
+}
+</style>

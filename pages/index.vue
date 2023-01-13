@@ -1,7 +1,12 @@
 <template>
-  <section class="container" style="top: 86px;">
+  <section class="play-books-home container" style="top: 86px;">
     <div class="columns is-multiline align-items-full py-5">
-      <playBookCard v-for="(book, index) in books" :key="index" :book="book" />
+      <playBookCard
+        v-for="(book, index) in books"
+        :key="index"
+        :book="book"
+        class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
+      />
     </div>
   </section>
 </template>
@@ -16,6 +21,7 @@ export default defineComponent({
   components: { playBookCard },
   setup() {
     const { books } = useBookData()
+    console.log(books)
     return {
       books,
     }
@@ -23,4 +29,12 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.play-books-home {
+  top: 86px;
+  .play-book-card {
+    display: flex;
+    cursor: pointer;
+  }
+}
+</style>

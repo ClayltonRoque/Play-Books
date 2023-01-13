@@ -6,7 +6,7 @@ export interface IBooks {
   };
   previewLink: string;
   title: string;
-  authors: string | string[];
+  authors: string[];
   publisher: string;
   categories: string[];
   language: string;
@@ -23,3 +23,4 @@ export interface Volume {
   volumeInfo: IBooks;
 }
 }
+

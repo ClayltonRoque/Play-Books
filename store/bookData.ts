@@ -1,5 +1,5 @@
 export interface StateProps {
-  books: BookDocument.IBooks[];
+  books: BookDocument.Volume[];
 }
 
 const state = (): StateProps => ({
@@ -7,7 +7,7 @@ const state = (): StateProps => ({
 });
 
 const mutations = {
-  SAVE_BOOKS(state: StateProps, payload: BookDocument.IBooks[]) {
+  SAVE_BOOKS(state: StateProps, payload: BookDocument.Volume[]) {
     state.books = payload;
   },
 };
