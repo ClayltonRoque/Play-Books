@@ -33,12 +33,11 @@ $button-hover-border-color: $brand-blue;
 $button-focus-border-color: $brand-blue;
 $button-focus-box-shadow-size: 0;
 
+$scheme-main: $base-background;
+$background: $scheme-main;
+
 $card-background-color: $base-post;
 $card-radius: 0.625rem;
-
-
-// $scheme-main: #000000;
-// $background: $scheme-main;
 
 // Lists and maps
 $custom-colors: (

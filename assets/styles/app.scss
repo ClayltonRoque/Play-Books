@@ -1,21 +1,7 @@
+@import "base/base";
+@import "base/theme";
 @import "variables";
 @import "colors";
 
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
-
-html {
-  background-color: $base-background;
-  &::-webkit-scrollbar {
-    width: 0.500rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $base-border;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $brand-blue;
-    border-radius: 999px;
-  }
-}
