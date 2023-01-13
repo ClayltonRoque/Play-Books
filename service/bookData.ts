@@ -29,9 +29,11 @@ export function useBookData() {
           maxResults,
           startIndex,
         },
-      });
+      })
 
-      store.commit("bookData/SAVE_BOOKS", data);
+      // const volumes = data.items.map((volume: any) =>  volume.volumeInfo );
+      
+      store.commit("bookData/SAVE_BOOKS", data.items);
     } catch (error) {
       console.log("Não foi possível buscar informações com o servidor");
     }

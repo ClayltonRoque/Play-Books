@@ -9,10 +9,9 @@
         <Nuxt-link to="/" class="navbar-item">
           <img
             src="https://s3-alpha-sig.figma.com/img/0a58/5928/1d7436d96ee3fa71a00f8daf990b5ee3?Expires=1674432000&Signature=AuKiJDKAURHKh-a3YZaf3Lq094Gj5Jc-F7WshiIW5io-QYNiAkQDlk70fbtWTHg8KQcevb~m1XRIs8w5U3eRi-dTB0GAvdkLpcwGzEpN3AKmchOHmSCnZlKrMwR3xcQt-cN870J6Nn0qbgkXrFv1O0bYu750fsYi9Tf~3x6HVw1Hi~vmBuroEnW8pyYvEYkbZlqsjNp2mvOqdkRt~uMsI27rLaBjn6zZ3ldxYQ8gSZDoLz2hxuKuP1uZk2Dp4zk1IQxtM2Q0r6NTdciqk125ClVt-sIOc5e9NfXUnH3Vk~HtfYKD~PHiqOEtJrErnqAr-Yltc0yCogGAnenAfsNRWg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-            style="max-height: 2.5rem;"
           />
         </Nuxt-link>
-        <div style="display: flex; width: 100%; justify-content: center;">
+        <div class="content-search">
           <Search />
         </div>
       </div>
@@ -52,6 +51,14 @@ export default defineComponent({
 .play-book-navbar {
   .navbar-brand {
     flex: 1;
+    img {
+      max-height: 2.5rem;
+    }
+    .content-search {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
   }
   .navbar-menu {
     flex-grow: 0;

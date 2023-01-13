@@ -38,4 +38,10 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.play-book-search {
+  display: flex;
+  width: 70%;
+  gap: 1rem;
+}
+</style>
