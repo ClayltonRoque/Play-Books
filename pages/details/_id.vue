@@ -1,5 +1,5 @@
 <template>
-  <section class="container" style="top: 86px">
+  <section class="play-books-details container" style="top: 86px;">
     <div class="py-5">
       <p class="has-text-base-title">Meu Id: {{ $route.params.id }}</p>
     </div>
@@ -7,12 +7,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
-  setup () {
+  setup() {
     return {}
-  }
-});
+  },
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

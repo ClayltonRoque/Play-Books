@@ -5,16 +5,15 @@
   </div>
 </template>
 
-<
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
-import PlayBookNavBar from "~/components/Navbar.vue";
+import { defineComponent } from '@nuxtjs/composition-api'
+import PlayBookNavBar from '~/components/Navbar.vue'
 
 export default defineComponent({
   components: {
     PlayBookNavBar,
   },
-});
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

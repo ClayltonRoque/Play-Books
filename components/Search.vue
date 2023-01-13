@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from '@nuxtjs/composition-api'
 
-import { useBookData } from '~/service/bookData'
+import { useBookData } from '../service/bookData'
 
 export default defineComponent({
   name: 'playBookSearch',
@@ -37,3 +37,5 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss"></style>
