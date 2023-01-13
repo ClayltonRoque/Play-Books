@@ -1,5 +1,5 @@
 <template>
-  <div class="play-book-bookcard" @click="$router.push({path: `/details/${book.id}`})">
+  <Nuxt-link class="play-book-bookcard" :to="{ name: 'details-id', params: { id: book.id } }">
     <div class="card is-desktop">
         <div class="card-content">
           <div class="columns">
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-  </div>
+  </Nuxt-link>
 </template>
 
 <script lang="ts">
