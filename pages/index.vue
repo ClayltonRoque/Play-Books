@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pre>{{ storeBooks }}</pre>
+    <pre>{{ books }}</pre>
   </div>
 </template>
 
@@ -11,9 +11,9 @@ import { useBookData } from "~/service/bookData";
 
 export default defineComponent({
   setup() {
-    const { storeBooks } = useBookData();
+    const { books } = useBookData();
     return {
-      storeBooks,
+      books,
     };
   },
 });
