@@ -28,11 +28,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { Volume } from '../interfaces/bookProps'
 
 export default defineComponent({
   name: 'playBookCard',
-  props: ['book'],
+  props: {
+    book: {
+      type: Object as PropType<Volume>,
+      required: true,
+    },
+  },
   setup() {
     return {}
   },
