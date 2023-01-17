@@ -4,16 +4,16 @@
       <div class="card is-desktop">
         <div class="card-content">
           <div class="media">
-            <div class="media-left" style="max-width: 183px;">
+            <div class="media-left" style="max-width: 183px">
               <figure
                 v-if="imageBook"
                 class="media"
-                style="border-top: 0; padding-top: 0;"
+                style="border-top: 0; padding-top: 0"
               >
                 <img :src="imageBook" />
               </figure>
             </div>
-            <div class="media-content" style="overflow: hidden;">
+            <div class="media-content" style="overflow: hidden">
               <div class="content">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
@@ -42,6 +42,7 @@
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </p>
+                <ButtonSaveBook class="mt-2" :book="book" />
               </div>
             </div>
           </div>
@@ -54,10 +55,15 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
+import ButtonSaveBook from '~/components/ButtonSaveBook.vue'
+
 import { useVolume } from '@/service/volume'
 
 export default defineComponent({
   name: 'PlayBookCard',
+  components: {
+    ButtonSaveBook,
+  },
   props: {
     book: {
       type: Object as PropType<BookDocument.Volume>,
