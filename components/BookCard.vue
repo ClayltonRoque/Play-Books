@@ -5,7 +5,7 @@
         <div class="card-content">
           <div class="columns">
             <div class="column">
-              <img :src="imageBook" />
+              <img :src="imageBook">
             </div>
             <div class="column" style="overflow: hidden;">
               <div class="content">
@@ -13,8 +13,8 @@
                   {{ book.volumeInfo.title }}
                 </p>
                 <p
-                  v-if="book.volumeInfo.authors"
                   v-for="authors in book.volumeInfo.authors"
+                  v-if="book.volumeInfo.authors"
                   class="subtitle subtitle-card has-text-base-subtitle"
                 >
                   {{ authors }}
@@ -50,21 +50,21 @@
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'playBookCard',
+  name: 'PlayBookCard',
   props: {
     book: {
       type: Object as PropType<BookDocument.Volume>,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props) {
+  setup (props) {
     const imageBook =
       props.book.volumeInfo.imageLinks &&
       props.book.volumeInfo.imageLinks.smallThumbnail
     return {
-      imageBook,
+      imageBook
     }
-  },
+  }
 })
 </script>
 
