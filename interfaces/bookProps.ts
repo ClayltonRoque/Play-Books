@@ -1,23 +1,23 @@
 export interface IBooks {
   imageLinks: {
-    thumbnail: string;
-    smallThumbnail: string;
-  };
-  previewLink: string;
-  title: string;
-  authors: string | string[];
-  publisher: string;
-  categories: string[];
-  language: string;
-  publishedDate: string;
-  pageCount: number;
-  description: string;
+    thumbnail: string
+    smallThumbnail: string
+  }
+  previewLink: string
+  title: string
+  authors: string | string[]
+  publisher: string
+  categories: string[]
+  language: string
+  publishedDate: string
+  pageCount: number
+  description: string
 }
 
 export interface Volume {
-  id: string;
+  id: string
   searchInfo?: {
-    textSnippet?: string;
-  };
-  volumeInfo: IBooks;
+    textSnippet?: string
+  }
+  volumeInfo: IBooks
 }

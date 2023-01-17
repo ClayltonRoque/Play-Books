@@ -6,7 +6,7 @@
         class="input"
         type="text"
         placeholder="Pesquisar livros"
-      >
+      />
     </form>
   </div>
 </template>
@@ -18,23 +18,23 @@ import { useBookData } from '../service/bookData'
 
 export default defineComponent({
   name: 'PlayBookSearch',
-  setup () {
+  setup() {
     const { getDataBooks } = useBookData()
 
     const state = reactive({
-      query: ''
+      query: '',
     })
 
-    async function submit () {
+    async function submit() {
       await getDataBooks(state.query)
     }
 
     return {
       state,
       getDataBooks,
-      submit
+      submit,
     }
-  }
+  },
 })
 </script>
 

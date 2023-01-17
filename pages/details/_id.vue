@@ -1,9 +1,7 @@
 <template>
   <section class="play-books-details container">
     <div class="py-5">
-      <p class="has-text-base-title">
-        Meu Id: {{ $route.params.id }}
-      </p>
+      <p class="has-text-base-title">Meu Id: {{ $route.params.id }}</p>
     </div>
   </section>
 </template>
@@ -12,9 +10,9 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'PlayBookDetails',
-  setup () {
+  setup() {
     return {}
-  }
+  },
 })
 </script>
 

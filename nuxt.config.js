@@ -3,15 +3,15 @@ export default {
   head: {
     title: 'play-books',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -24,11 +24,11 @@ export default {
   components: false,
 
   buefy: {
-    css: false
+    css: false,
   },
 
   axios: {
-    baseUrl: 'https://www.googleapis.com/books/v1'
+    baseUrl: 'https://www.googleapis.com/books/v1',
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -36,14 +36,14 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://composition-api.nuxtjs.org/getting-started/setup
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -54,8 +54,8 @@ export default {
           @import '~assets/styles/_variables.scss';
           @import '~assets/styles/_mixins.scss';
           @import '~assets/styles/_colors.scss';
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
 }

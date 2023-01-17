@@ -1,4 +1,4 @@
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // Set your colors
 $brand-blue: #00acee;
@@ -41,73 +41,73 @@ $card-radius: 0.625rem;
 
 // Lists and maps
 $custom-colors: (
-  "brand-blue": (
+  'brand-blue': (
     $brand-blue,
     findLightColor($brand-blue),
     findDarkColor($brand-blue),
     findColorInvert($brand-blue),
   ),
-  "brand-blue-white": (
+  'brand-blue-white': (
     $brand-blue-white,
     findLightColor($brand-blue-white),
     findDarkColor($brand-blue-white),
     findColorInvert($brand-blue-white),
   ),
-  "brand-red": (
+  'brand-red': (
     $brand-red,
     findLightColor($brand-red),
     findDarkColor($brand-red),
     findColorInvert($brand-red),
   ),
-  "base-title": (
+  'base-title': (
     $base-title,
     findLightColor($base-title),
     findDarkColor($base-title),
     findColorInvert($base-title),
   ),
-  "base-subtitle": (
+  'base-subtitle': (
     $base-subtitle,
     findLightColor($base-subtitle),
     findDarkColor($base-subtitle),
     findColorInvert($base-subtitle),
   ),
-  "base-text": (
+  'base-text': (
     $base-text,
     findLightColor($base-text),
     findDarkColor($base-text),
     findColorInvert($base-text),
   ),
-  "base-span": (
+  'base-span': (
     $base-span,
     findLightColor($base-span),
     findDarkColor($base-span),
     findColorInvert($base-span),
   ),
-  "base-label": (
+  'base-label': (
     $base-label,
     findLightColor($base-label),
     findDarkColor($base-label),
     findColorInvert($base-label),
   ),
-  "base-border": (
+  'base-border': (
     $base-border,
     findLightColor($base-border),
     findDarkColor($base-border),
     findColorInvert($base-border),
   ),
-  "base-post": (
+  'base-post': (
     $base-post,
     findLightColor($base-post),
     findDarkColor($base-post),
     findColorInvert($base-post),
   ),
-  "base-profile": (
+  'base-profile': (
     $base-profile,
     findLightColor($base-profile),
     findDarkColor($base-profile),
     findColorInvert($base-profile),
   ),
-  "base-background": (
+  'base-background': (
     $base-background,
     findLightColor($base-background),
     findDarkColor($base-background),

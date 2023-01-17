@@ -10,9 +10,9 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'PlayBookFavorites',
-  setup () {
+  setup() {
     return {}
-  }
+  },
 })
 </script>
 

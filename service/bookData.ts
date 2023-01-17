@@ -2,12 +2,12 @@ import { useContext, useStore, computed } from '@nuxtjs/composition-api'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
-  bookData: StateBook;
+  bookData: StateBook
 }
 
 const API_KEY = 'AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'
 
-export function useBookData () {
+export function useBookData() {
   const nuxtContext = useContext()
 
   const store = useStore<StateProps>()
@@ -16,19 +16,15 @@ export function useBookData () {
     return store.state.bookData.books
   })
 
-  async function getDataBooks (
-    query: string,
-    startIndex = 0,
-    maxResults = 20
-  ) {
+  async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
           q: query,
           key: API_KEY,
           maxResults,
-          startIndex
-        }
+          startIndex,
+        },
       })
 
       // const volumes = data.items.map((volume: any) =>  volume.volumeInfo );
@@ -41,6 +37,6 @@ export function useBookData () {
 
   return {
     getDataBooks,
-    books
+    books,
   }
 }
