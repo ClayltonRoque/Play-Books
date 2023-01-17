@@ -58,12 +58,16 @@ export default defineComponent({
     }
     .content-search {
       display: flex;
-      width: 100%;
+      flex: 1;
+      // width: 100%;
       justify-content: center;
     }
   }
   .navbar-menu {
     flex-grow: 0;
+    .navbar-item {
+      font-size: 1.25rem;
+    }
   }
 }
 </style>

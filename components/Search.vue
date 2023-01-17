@@ -3,7 +3,7 @@
     <form @submit.prevent="submit">
       <input
         v-model="state.query"
-        class="input"
+        class="input is-size-5"
         type="text"
         placeholder="Pesquisar livros"
       />
@@ -47,6 +47,11 @@ export default defineComponent({
 
   form {
     width: 100%;
+
+    input {
+      // padding: 1rem 1rem;
+      // padding: 0.75rem 1rem;
+    }
   }
 }
 </style>
