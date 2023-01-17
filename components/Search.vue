@@ -41,7 +41,12 @@ export default defineComponent({
 <style lang="scss">
 .play-book-search {
   display: flex;
+  justify-content: center;
   width: 70%;
   gap: 1rem;
+
+  form {
+    width: 100%;
+  }
 }
 </style>
