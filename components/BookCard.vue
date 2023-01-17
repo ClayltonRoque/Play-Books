@@ -7,18 +7,22 @@
             <div class="column">
               <img :src="imageBook" />
             </div>
-            <div class="column" style="overflow: hidden">
+            <div class="column" style="overflow: hidden;">
               <div class="content">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
                 </p>
-                <div v-if="book.volumeInfo.authors.length">
+                <div
+                  v-if="
+                    book.volumeInfo.authors && book.volumeInfo.authors.length
+                  "
+                >
                   <p
-                    v-for="(authors, index) in book.volumeInfo.authors"
+                    v-for="(author, index) in authors"
                     :key="index"
                     class="subtitle subtitle-card has-text-base-subtitle"
                   >
-                    {{ authors }}
+                    {{ author }}
                   </p>
                 </div>
                 <p v-else class="subtitle subtitle-card has-text-base-subtitle">
@@ -48,6 +52,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
+import { useVolume } from '@/service/volume'
+
 export default defineComponent({
   name: 'PlayBookCard',
   props: {
@@ -60,7 +66,11 @@ export default defineComponent({
     const imageBook =
       props.book.volumeInfo.imageLinks &&
       props.book.volumeInfo.imageLinks.smallThumbnail
+
+    const { authors } = useVolume(props.book)
+
     return {
+      authors,
       imageBook,
     }
   },
