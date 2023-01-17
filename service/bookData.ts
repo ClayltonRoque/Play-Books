@@ -35,8 +35,13 @@ export function useBookData() {
     }
   }
 
+  function saveBooks(favoriteBook: BookDocument.Volume) {
+    store.commit('bookData/SAVE_BOOKS_FAVORITES', favoriteBook)
+  }
+
   return {
-    getDataBooks,
     books,
+    getDataBooks,
+    saveBooks,
   }
 }
