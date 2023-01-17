@@ -11,8 +11,8 @@ import PlayBookNavBar from '~/components/Navbar.vue'
 
 export default defineComponent({
   components: {
-    PlayBookNavBar
-  }
+    PlayBookNavBar,
+  },
 })
 </script>
 

@@ -5,24 +5,23 @@
         <div class="card-content">
           <div class="columns">
             <div class="column">
-              <img :src="imageBook">
+              <img :src="imageBook" />
             </div>
-            <div class="column" style="overflow: hidden;">
+            <div class="column" style="overflow: hidden">
               <div class="content">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
                 </p>
-                <p
-                  v-for="authors in book.volumeInfo.authors"
-                  v-if="book.volumeInfo.authors"
-                  class="subtitle subtitle-card has-text-base-subtitle"
-                >
-                  {{ authors }}
-                </p>
-                <p
-                  v-else="book.volumeInfo.authors"
-                  class="subtitle subtitle-card has-text-base-subtitle"
-                >
+                <div v-if="book.volumeInfo.authors.length">
+                  <p
+                    v-for="(authors, index) in book.volumeInfo.authors"
+                    :key="index"
+                    class="subtitle subtitle-card has-text-base-subtitle"
+                  >
+                    {{ authors }}
+                  </p>
+                </div>
+                <p v-else class="subtitle subtitle-card has-text-base-subtitle">
                   Author
                 </p>
                 <p
@@ -32,7 +31,7 @@
                   {{ book.volumeInfo.description }}
                 </p>
                 <p
-                  v-else="book.volumeInfo.description"
+                  v-else
                   class="description description-card has-text-base-text is-size-6"
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -54,17 +53,17 @@ export default defineComponent({
   props: {
     book: {
       type: Object as PropType<BookDocument.Volume>,
-      required: true
-    }
+      required: true,
+    },
   },
-  setup (props) {
+  setup(props) {
     const imageBook =
       props.book.volumeInfo.imageLinks &&
       props.book.volumeInfo.imageLinks.smallThumbnail
     return {
-      imageBook
+      imageBook,
     }
-  }
+  },
 })
 </script>
 

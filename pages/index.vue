@@ -1,5 +1,5 @@
 <template>
-  <section class="play-books-home container" style="top: 86px;">
+  <section class="play-books-home container" style="top: 86px">
     <div class="columns is-multiline align-items-full py-5">
       <playBookCard
         v-for="(book, index) in books"
@@ -19,13 +19,12 @@ import { useBookData } from '../service/bookData'
 export default defineComponent({
   name: 'PlayBookSearch',
   components: { playBookCard },
-  setup () {
+  setup() {
     const { books } = useBookData()
-    console.log(books)
     return {
-      books
+      books,
     }
-  }
+  },
 })
 </script>
 
