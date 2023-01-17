@@ -1,13 +1,19 @@
 <template>
   <div class="play-book-bookcard">
-    <Nuxt-link :to="{ name: 'details-id', params: { id: book.id } }">
+    <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
       <div class="card is-desktop">
         <div class="card-content">
-          <div class="columns">
-            <div class="column">
-              <img :src="imageBook" />
+          <div class="media">
+            <div class="media-left" style="max-width: 183px;">
+              <figure
+                v-if="imageBook"
+                class="media"
+                style="border-top: 0; padding-top: 0;"
+              >
+                <img :src="imageBook" />
+              </figure>
             </div>
-            <div class="column" style="overflow: hidden;">
+            <div class="media-content" style="overflow: hidden;">
               <div class="content">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
@@ -17,12 +23,8 @@
                     book.volumeInfo.authors && book.volumeInfo.authors.length
                   "
                 >
-                  <p
-                    v-for="(author, index) in authors"
-                    :key="index"
-                    class="subtitle subtitle-card has-text-base-subtitle"
-                  >
-                    {{ author }}
+                  <p class="subtitle subtitle-card has-text-base-subtitle">
+                    {{ book.volumeInfo.authors[0] }}
                   </p>
                 </div>
                 <p v-else class="subtitle subtitle-card has-text-base-subtitle">
@@ -85,7 +87,7 @@ export default defineComponent({
     background-size: cover;
     border-radius: 10px;
     border: 1px solid #112131;
-    max-height: 200px;
+    height: 200px;
     width: 100%;
     max-width: 150px;
 
@@ -105,6 +107,9 @@ export default defineComponent({
 
     transition: all 0.2s;
   }
+  .content p {
+    margin-bottom: 0rem;
+  }
   .title-card {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -116,6 +121,7 @@ export default defineComponent({
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    margin-bottom: auto;
   }
   .description-card {
     height: fit-content;
@@ -126,11 +132,15 @@ export default defineComponent({
     -webkit-line-clamp: 3;
   }
   .card {
-    height: 254px;
+    // height: 254px;
     max-width: 392px;
     border: 1px solid #112131;
     &:hover {
       border-color: #00acee;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 350px;
     }
   }
 }
