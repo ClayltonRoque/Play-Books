@@ -1,4 +1,4 @@
-declare module BookDocument {
+declare namespace BookDocument {
 export interface IBooks {
   imageLinks: {
     thumbnail: string;
@@ -23,4 +23,3 @@ export interface Volume {
   volumeInfo: IBooks;
 }
 }
-

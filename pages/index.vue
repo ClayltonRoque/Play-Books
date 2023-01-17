@@ -17,15 +17,15 @@ import playBookCard from '../components/BookCard.vue'
 import { useBookData } from '../service/bookData'
 
 export default defineComponent({
-  name: 'playBookSearch',
+  name: 'PlayBookSearch',
   components: { playBookCard },
-  setup() {
+  setup () {
     const { books } = useBookData()
     console.log(books)
     return {
-      books,
+      books
     }
-  },
+  }
 })
 </script>
 
