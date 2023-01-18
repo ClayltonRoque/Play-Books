@@ -8071,6 +8071,11 @@ sass@^1.57.1:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
+save-dev@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/save-dev/-/save-dev-0.0.1-security.tgz#5eb7267e25a8709c20ac336f0101c8d35900ca5e"
+  integrity sha512-k6knZTDNK8PKKbIqnvxiOveJinuw2LcQjqDoaorZWP9M5AR2EPsnpDeSbeoZZ0pHr5ze1uoaKdK8NBGQrJ34Uw==
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -9228,6 +9233,11 @@ vue-loader@^15.9.7:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-material-design-icons@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/vue-material-design-icons/-/vue-material-design-icons-5.1.2.tgz#d0b9227786672fc17be239fb8c1d8e22e33feb45"
+  integrity sha512-nD1qFM2qAkMlVoe23EfNKIeMfYl6YjHZjSty9q0mwc2gXmPmvEhixywJQhM+VF5KVBI1zAkVTNLoUEERPY10pA==
 
 vue-meta@^2.4.0:
   version "2.4.0"

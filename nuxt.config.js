@@ -42,6 +42,9 @@ export default {
     '@nuxt/typescript-build',
     // https://composition-api.nuxtjs.org/getting-started/setup
     '@nuxtjs/composition-api/module',
+    // https://github.com/robcresswell/vue-material-design-icons
+    // https://pictogrammers.com/library/mdi/
+    '@/modules/material-design-icons.js'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
