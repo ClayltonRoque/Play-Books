@@ -1,27 +1,21 @@
 <template>
   <section class="play-books-details container">
-    <div class="py-5">
-      <p class="has-text-base-title">Meu Id:</p>
-      <button @click="test"></button>
+    <div class="books-details-container py-5">
+      <DetailsCard />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api';
+import DetailsCard from '../../components/DetailsCard.vue';
 
 export default defineComponent({
   name: 'PlayBookDetails',
-
+  components: { DetailsCard },
   setup() {
-    const router = useRouter()
-
-    function test() {
-      router.push('/')
-    }
 
     return {
-      test,
     }
   },
 })
@@ -30,5 +24,13 @@ export default defineComponent({
 <style lang="scss">
 .play-books-details {
   top: 86px;
+  padding: 0px 2rem;
+
+  .books-details-container {
+    max-width: 52rem;
+    width: 100%;
+    margin: 0 auto;
+    border: 0;
+  }
 }
 </style>
