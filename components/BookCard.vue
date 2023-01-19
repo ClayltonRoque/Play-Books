@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
 
 import ButtonSaveBook from '~/components/ButtonSaveBook.vue'
 
@@ -71,15 +71,16 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageBook =
-      props.book.volumeInfo.imageLinks &&
-      props.book.volumeInfo.imageLinks.smallThumbnail
-
+    const imageThumbnail = computed(
+      () =>
+        props.book.volumeInfo.imageLinks.thumbnail &&
+        props.book.volumeInfo.imageLinks.smallThumbnail
+    )
     const { authors } = useVolume(props.book)
 
     return {
       authors,
-      imageBook,
+      imageThumbnail,
     }
   },
 })
