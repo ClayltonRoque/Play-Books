@@ -1,39 +1,54 @@
 <template>
   <div class="play-books-details-card card is-desktop has-base-profile">
     <div class="card-content">
-      <header class="card-header pb-2" style="justify-content: space-between">
+      <header class="card-header pb-2" style="justify-content: space-between;">
         <a
-        class="has-text-brand-blue button-details is-size-6"
-        @click="hasHistory() ? $router.back() : $router.push('/')"
+          class="has-text-brand-blue button-details is-size-6"
+          @click="hasHistory() ? $router.back() : $router.push('/')"
         >
-          <ChevronLeft class="button-icon" />VOLTAR
+          VOLTAR
         </a>
         <a
           class="has-text-brand-blue button-details is-size-6"
-          href="https://books.google.com.br/books?id=QRIuEAAAQBAJ&printsec=frontcover&dq=java&hl=&cd=1&source=gbs_api#v=onepage&q=java&f=false" target="_blank"
+          :href="details.volumeInfo.previewLink"
+          target="_blank"
         >
-        PREVIEW <ArrowTopRight class="button-icon"/>
-      </a>
+          PREVIEW
+        </a>
       </header>
       <header class="card-header mb-4">
-        <p class="title is-size-3 has-text-base-title card-header-title px-0">Java Guia do Programador - 4ª Edição</p>
+        <p class="title is-size-3 has-text-base-title card-header-title px-0">
+          {{ details.volumeInfo.title }}
+        </p>
       </header>
       <div class="media mt-5">
         <div class="media-left mr-5">
-          <figure>
-            <img src="http://books.google.com/books/content?id=iTaKEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+          <figure v-if="imageThumbnail">
+            <img :src="imageThumbnail" />
+          </figure>
+          <figure v-else>
+            <img src="../assets/no-search.png" />
           </figure>
         </div>
-        <div class="media-content" style="overflow: hidden">
+        <div class="media-content" style="overflow: hidden;">
           <div class="columns">
             <div class="column">
               <div class="content">
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Autor
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  Josh Goldberg
-                </p>
+
+                <div
+                  v-if="
+                    details.volumeInfo.authors &&
+                    details.volumeInfo.authors.length
+                  "
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>{{ details.volumeInfo.authors[0] }}</p>
+                </div>
+
+                <p v-else class="subtitle has-text-base-subtitle">authors</p>
               </div>
             </div>
             <div class="column">
@@ -41,9 +56,18 @@
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Editora
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  Novatec Editora
-                </p>
+                <div
+                  v-if="
+                    details.volumeInfo.publisher &&
+                    details.volumeInfo.publisher.length
+                  "
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>
+                    {{ details.volumeInfo.publisher }}
+                  </p>
+                </div>
+                <p v-else class="subtitle has-text-base-subtitle">publisher</p>
               </div>
             </div>
             <div class="column">
@@ -51,9 +75,16 @@
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Categorias
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  Computers
-                </p>
+                <div
+                  v-if="
+                    details.volumeInfo.categories &&
+                    details.volumeInfo.categories.length
+                  "
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>{{ details.volumeInfo.categories[0] }}</p>
+                </div>
+                <p v-else class="subtitle has-text-base-subtitle">categories</p>
               </div>
             </div>
           </div>
@@ -63,9 +94,16 @@
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Idioma
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  pt-BR
-                </p>
+                <div
+                  v-if="
+                    details.volumeInfo.language &&
+                    details.volumeInfo.language.length
+                  "
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>{{ details.volumeInfo.language }}</p>
+                </div>
+                <p v-else class="subtitle has-text-base-subtitle">language</p>
               </div>
             </div>
             <div class="column">
@@ -73,8 +111,17 @@
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Publicado em
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  2022
+                <div
+                  v-if="
+                    details.volumeInfo.publishedDate &&
+                    details.volumeInfo.publishedDate.length
+                  "
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>{{ details.volumeInfo.publishedDate }}</p>
+                </div>
+                <p v-else class="subtitle has-text-base-subtitle">
+                  publisherDate
                 </p>
               </div>
             </div>
@@ -83,40 +130,51 @@
                 <p class="title is-size-5 has-text-base-title pb-2">
                   Páginas
                 </p>
-                <p class="subtitle has-text-base-subtitle">
-                  405
-                </p>
+                <div
+                  v-if="details.volumeInfo.pageCount"
+                  class="subtitle has-text-base-subtitle"
+                >
+                  <p>{{ details.volumeInfo.pageCount }}</p>
+                </div>
+                <p v-else class="subtitle has-text-base-subtitle">pageCount</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button class="button is-align-content-center is-size-6"><HeartIcon class="button-icon mr-2"/> ADICIONAR</button>
+        <button class="button is-align-content-center is-size-6">
+          ADICIONAR
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
-import ArrowTopRight from 'vue-material-design-icons/ArrowTopRight.vue';
-import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
-import HeartIcon from 'vue-material-design-icons/Heart.vue';
+import { defineComponent, PropType, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'PlayBookDetailsCard',
-  components: {
-    HeartIcon,
-    ChevronLeft,
-    ArrowTopRight
+  props: {
+    details: {
+      type: Object as PropType<BookDocument.Volume>,
+      required: true,
+    },
   },
-  setup() {
+  setup(props) {
+    const imageThumbnail = computed(
+      () =>
+        props.details.volumeInfo.imageLinks.thumbnail &&
+        props.details.volumeInfo.imageLinks.smallThumbnail
+    )
+
     function hasHistory() {
       return window.history.length > 1
     }
     return {
       hasHistory,
+      imageThumbnail,
     }
   },
 })
@@ -124,7 +182,6 @@ export default defineComponent({
 
 <style lang="scss">
 .play-books-details-card {
-
   border: 2px solid #112131;
   &:hover {
     border-color: #00acee;
@@ -148,7 +205,7 @@ export default defineComponent({
     &:hover {
       border-color: #00acee;
     }
-  };
+  }
 
   img {
     background-repeat: no-repeat;
