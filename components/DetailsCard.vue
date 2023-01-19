@@ -2,7 +2,10 @@
   <div class="play-books-details-card card is-desktop has-base-profile">
     <div class="card-content">
       <header class="card-header pb-2" style="justify-content: space-between">
-        <a class="has-text-brand-blue button-details is-size-6">
+        <a
+        class="has-text-brand-blue button-details is-size-6"
+        @click="hasHistory() ? $router.back() : $router.push('/')"
+        >
           <ChevronLeft class="button-icon" />VOLTAR
         </a>
         <a
@@ -109,13 +112,19 @@ export default defineComponent({
     ArrowTopRight
   },
   setup() {
-    return {}
+    function hasHistory() {
+      return window.history.length > 1
+    }
+    return {
+      hasHistory,
+    }
   },
 })
 </script>
 
 <style lang="scss">
 .play-books-details-card {
+
   border: 2px solid #112131;
   &:hover {
     border-color: #00acee;
@@ -166,6 +175,13 @@ export default defineComponent({
     }
 
     transition: all 0.2s;
+  }
+
+  .media {
+    @media (max-width: 380px) {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
   }
 }
 </style>
