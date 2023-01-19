@@ -1,10 +1,18 @@
 <template>
   <div>
     <button
+      v-if="!favoriteBooks(book)"
       class="button is-align-content-center is-size-6"
       @click="saveBooks(book)"
     >
       Favoritar
+    </button>
+    <button
+      v-else
+      class="button is-brand-red is-align-content-center is-size-6"
+      @click="saveBooks(book)"
+    >
+      Remover
     </button>
   </div>
 </template>
@@ -23,9 +31,11 @@ export default defineComponent({
     },
   },
   setup() {
-    const { saveBooks } = useBookData()
+    const { saveBooks, favoriteBooks } = useBookData()
+
     return {
       saveBooks,
+      favoriteBooks,
     }
   },
 })
