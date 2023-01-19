@@ -1,20 +1,17 @@
 <template>
   <section class="play-books-details container">
     <div class="py-5">
-      <p class="has-text-base-title">Meu Id: {{ $route.params.id }}</p>
-      <PlayBookButtonSaveBook />
+      <p class="has-text-base-title">Meu Id:</p>
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import PlayBookButtonSaveBook from '../../components/ButtonSaveBook.vue'
+
 export default defineComponent({
   name: 'PlayBookDetails',
-  components: {
-    PlayBookButtonSaveBook,
-  },
+
   setup() {
     return {}
   },

@@ -39,8 +39,16 @@ export function useBookData() {
     store.commit('bookData/SAVE_BOOKS_FAVORITES', favoriteBook)
   }
 
+  function favoriteBooks(book: BookDocument.Volume) {
+    const favoriteBook = store.state.bookData.favoritesBooks.find(
+      (item) => item.id === book.id
+    )
+    return favoriteBook
+  }
+
   return {
     books,
+    favoriteBooks,
     getDataBooks,
     saveBooks,
   }
