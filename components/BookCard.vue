@@ -1,20 +1,20 @@
 <template>
   <div class="play-book-bookcard">
-    <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
-      <div class="card is-desktop">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left" style="max-width: 183px">
-              <figure
-                v-if="imageBook"
-                class="media"
-                style="border-top: 0; padding-top: 0"
-              >
-                <img :src="imageBook" />
-              </figure>
-            </div>
-            <div class="media-content" style="overflow: hidden">
-              <div class="content">
+    <div class="card is-desktop">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left" style="max-width: 183px">
+            <figure
+              v-if="imageBook"
+              class="media"
+              style="border-top: 0; padding-top: 0"
+            >
+              <img :src="imageBook" />
+            </figure>
+          </div>
+          <div class="media-content" style="overflow: hidden">
+            <div class="content">
+              <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
                 </p>
@@ -42,13 +42,13 @@
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </p>
-                <ButtonSaveBook class="mt-2" :book="book" />
-              </div>
+              </Nuxt-link>
+              <ButtonSaveBook class="mt-2" :book="book" />
             </div>
           </div>
         </div>
       </div>
-    </Nuxt-link>
+    </div>
   </div>
 </template>
 

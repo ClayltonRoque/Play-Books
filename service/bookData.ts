@@ -39,6 +39,10 @@ export function useBookData() {
     store.commit('bookData/SAVE_BOOKS_FAVORITES', favoriteBook)
   }
 
+  function removeBook(favoriteBook: BookDocument.Volume) {
+    store.commit('bookData/REMOVE_BOOK_FAVORITES', favoriteBook)
+  }
+
   function favoriteBooks(book: BookDocument.Volume) {
     const favoriteBook = store.state.bookData.favoritesBooks.find(
       (item) => item.id === book.id
@@ -51,5 +55,6 @@ export function useBookData() {
     favoriteBooks,
     getDataBooks,
     saveBooks,
+    removeBook,
   }
 }
