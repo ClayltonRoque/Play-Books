@@ -179,7 +179,7 @@ export default defineComponent({
 
 <style lang="scss">
 .play-books-details-card {
-  border: 2px solid #112131;
+  border: 1px solid #112131;
   &:hover {
     border-color: #00acee;
   }
