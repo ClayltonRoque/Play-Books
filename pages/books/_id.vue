@@ -5,11 +5,26 @@
         <DetailsCard :details="details" />
       </div>
       <div class="details-content">
-        <p class="title is-size-5 has-text-base-title pb-2">
+        <p
+          v-if="details?.volumeInfo.title"
+          class="title is-size-5 has-text-base-title pb-2"
+        >
           {{ details?.volumeInfo.title }}
         </p>
-        <p class="subtitle has-text-base-subtitle">
+        <p v-else class="title is-size-5 has-text-base-title pb-2">
+          Find the perfect search engine to find your next book
+        </p>
+        <p
+          v-if="details?.volumeInfo.description"
+          class="subtitle has-text-base-subtitle"
+        >
           {{ details?.volumeInfo.description }}
+        </p>
+        <p v-else class="subtitle has-text-base-subtitle">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+          soluta fugiat quas aut? Ea iusto, dolorum fugit consequatur fugiat
+          harum? Provident minus magni laborum saepe et labore aperiam quisquam
+          architecto?
         </p>
       </div>
     </div>
