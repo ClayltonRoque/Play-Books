@@ -10,7 +10,7 @@
     <button
       v-else
       class="button is-brand-red is-align-content-center is-size-6"
-      @click="saveBooks(book)"
+      @click="removeBook(book)"
     >
       Remover
     </button>
@@ -31,10 +31,11 @@ export default defineComponent({
     },
   },
   setup() {
-    const { saveBooks, favoriteBooks } = useBookData()
+    const { saveBooks, favoriteBooks, removeBook } = useBookData()
 
     return {
       saveBooks,
+      removeBook,
       favoriteBooks,
     }
   },

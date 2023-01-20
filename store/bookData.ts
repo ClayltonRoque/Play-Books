@@ -15,6 +15,10 @@ const mutations = {
   SAVE_BOOKS_FAVORITES(state: StateProps, payload: BookDocument.Volume) {
     state.favoritesBooks.push(payload)
   },
+  REMOVE_BOOK_FAVORITES(state: StateProps, payload: BookDocument.Volume) {
+    const index = state.favoritesBooks.indexOf(payload)
+    state.favoritesBooks.splice(index, 1)
+  },
 }
 
 export default {
