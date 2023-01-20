@@ -1,8 +1,8 @@
 declare namespace BookDocument {
   export interface IBooks {
     imageLinks: {
-      thumbnail: string
-      smallThumbnail: string
+      thumbnail: string;
+      smallThumbnail: string;
     }
     previewLink: string
     title: string

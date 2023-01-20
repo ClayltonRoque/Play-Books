@@ -27,7 +27,7 @@
             <img :src="imageThumbnail" />
           </figure>
           <figure v-else>
-            <img src="../assets/no-search.png" />
+            <img src="~/assets/no-image.png" />
           </figure>
         </div>
         <div class="media-content" style="overflow: hidden;">
@@ -153,6 +153,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from '@nuxtjs/composition-api'
+import { useVolume } from '@/service/volume'
 
 export default defineComponent({
   name: 'PlayBookDetailsCard',
@@ -163,11 +164,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageThumbnail = computed(
-      () =>
-        props.details.volumeInfo.imageLinks.thumbnail &&
-        props.details.volumeInfo.imageLinks.smallThumbnail
-    )
+    const { imageThumbnail } = useVolume(props.details)
 
     function hasHistory() {
       return window.history.length > 1

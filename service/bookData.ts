@@ -21,6 +21,8 @@ export function useBookData() {
   })
 
   async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
+    store.commit('bookData/SAVE_BOOKS', [])
+    store.dispatch('siteData/block')
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
@@ -35,6 +37,8 @@ export function useBookData() {
       store.commit('bookData/SAVE_BOOKS', data.items)
     } catch (error) {
       console.log('Não foi possível buscar informações com o servidor')
+    } finally {
+      store.dispatch('siteData/unBlock')
     }
   }
 
