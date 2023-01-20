@@ -1,31 +1,31 @@
 <template>
   <section class="play-books-details container py-5">
-    <div class="books-details-container px-5">
+    <div v-if="details" class="books-details-container px-5">
       <div v-if="details">
         <DetailsCard :details="details" />
       </div>
       <div class="details-content">
-        <p
-          v-if="details?.volumeInfo.title"
-          class="title is-size-5 has-text-base-title pb-2"
-        >
+        <p class="title is-size-5 has-text-base-title pb-2">
           {{ details?.volumeInfo.title }}
         </p>
-        <p v-else class="title is-size-5 has-text-base-title pb-2">
-          Find the perfect search engine to find your next book
-        </p>
-        <p
-          v-if="details?.volumeInfo.description"
-          class="subtitle has-text-base-subtitle"
-        >
+        <div class="subtitle has-text-base-subtitle">
           {{ details?.volumeInfo.description }}
-        </p>
-        <p v-else class="subtitle has-text-base-subtitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-          soluta fugiat quas aut? Ea iusto, dolorum fugit consequatur fugiat
-          harum? Provident minus magni laborum saepe et labore aperiam quisquam
-          architecto?
-        </p>
+        </div>
+      </div>
+    </div>
+    <div v-else class="books-details-container px-5">
+      <div class="no-page-content">
+        <div class="no-page">
+          <figure>
+            <img src="../../assets/no-search.png" />
+          </figure>
+          <p class="title is-size-5 has-text-base-title pb-2">
+            Página não encontrada!
+          </p>
+          <p class="subtitle has-text-base-subtitle">
+            Pesquise e navegue pela lista de livros do Google Play Books
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -38,6 +38,7 @@ import {
   useRoute,
   useFetch,
   useContext,
+  useStore,
 } from '@nuxtjs/composition-api'
 import DetailsCard from '../../components/DetailsCard.vue'
 
@@ -49,9 +50,19 @@ export default defineComponent({
     const route = useRoute()
     const params = route.value.params
     const details = ref<BookDocument.Volume>()
+    const store = useStore()
+
     useFetch(async () => {
-      const { data } = await nuxtContext.$axios.get(`volumes/${params.id}`)
-      details.value = data
+      store.dispatch('siteData/block')
+      try {
+        const { data } = await nuxtContext.$axios.get(`volumes/${params.id}`)
+        details.value = data
+      } catch (error) {
+        // nuxtContext.redirect('/')
+        console.log('Não foi possível buscar informações com o servidor')
+      } finally {
+        store.dispatch('siteData/unBlock')
+      }
     })
     return {
       details,
@@ -79,6 +90,29 @@ export default defineComponent({
 
       p {
         line-height: 160% !important;
+      }
+    }
+
+    .no-page-content {
+      padding-top: 10rem;
+      .no-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          opacity: 0.3;
+        }
+
+        .title {
+          font-weight: 700;
+          opacity: 0.5;
+        }
+
+        .subtitle {
+          opacity: 0.5;
+        }
       }
     }
   }
