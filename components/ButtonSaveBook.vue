@@ -1,7 +1,7 @@
 <template>
   <div>
     <button
-      v-if="!favoriteBooks(book)"
+      v-if="!alreadyfavorite(book)"
       class="button is-align-content-center is-size-6"
       @click="saveBooks(book)"
     >
@@ -31,12 +31,12 @@ export default defineComponent({
     },
   },
   setup() {
-    const { saveBooks, favoriteBooks, removeBook } = useBookData()
+    const { saveBooks, alreadyfavorite, removeBook } = useBookData()
 
     return {
       saveBooks,
       removeBook,
-      favoriteBooks,
+      alreadyfavorite,
     }
   },
 })

@@ -20,7 +20,8 @@
     "nuxt-buefy": "^0.4.24",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@iconify/vue": "^4.0.2",

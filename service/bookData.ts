@@ -16,6 +16,10 @@ export function useBookData() {
     return store.state.bookData.books
   })
 
+  const favoriteBooks = computed(() => {
+    return store.state.bookData.favoritesBooks
+  })
+
   async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
@@ -43,7 +47,7 @@ export function useBookData() {
     store.commit('bookData/REMOVE_BOOK_FAVORITES', favoriteBook)
   }
 
-  function favoriteBooks(book: BookDocument.Volume) {
+  function alreadyfavorite(book: BookDocument.Volume) {
     const favoriteBook = store.state.bookData.favoritesBooks.find(
       (item) => item.id === book.id
     )
@@ -53,6 +57,7 @@ export function useBookData() {
   return {
     books,
     favoriteBooks,
+    alreadyfavorite,
     getDataBooks,
     saveBooks,
     removeBook,
