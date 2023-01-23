@@ -3,17 +3,17 @@
     <div class="card-content">
       <header class="card-header pb-2" style="justify-content: space-between;">
         <a
-          class="has-text-brand-blue button-details is-size-6"
+          class="has-text-brand-blue button-details is-size-6 is-uppercase"
           @click="hasHistory() ? $router.back() : $router.push('/')"
         >
-          VOLTAR
+          voltar
         </a>
         <a
-          class="has-text-brand-blue button-details is-size-6"
+          class="has-text-brand-blue button-details is-size-6 is-uppercase"
           :href="details.volumeInfo.previewLink"
           target="_blank"
         >
-          PREVIEW
+          preview
         </a>
       </header>
       <header class="card-header mb-4">
