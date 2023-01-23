@@ -59,9 +59,9 @@ export default {
     loaders: {
       scss: {
         additionalData: `
+          @import '~assets/styles/_colors.scss';
           @import '~assets/styles/_variables.scss';
           @import '~assets/styles/_mixins.scss';
-          @import '~assets/styles/_colors.scss';
         `,
       },
     },
