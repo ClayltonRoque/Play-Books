@@ -14,9 +14,9 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
-import { useBookData } from '../service/bookData'
+import { useBookData } from '~/service/bookData'
 
-import PlayBookCard from '../components/BookCard.vue'
+import PlayBookCard from '~/components/BookCard.vue'
 
 export default defineComponent({
   name: 'PlayBookFavorites',

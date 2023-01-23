@@ -2,18 +2,27 @@
   <section class="play-books-details container">
     <div class="py-5">
       <p class="has-text-base-title">Meu Id:</p>
+      <button @click="test"></button>
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'PlayBookDetails',
 
   setup() {
-    return {}
+    const router = useRouter()
+
+    function test() {
+      router.push('/')
+    }
+
+    return {
+      test,
+    }
   },
 })
 </script>

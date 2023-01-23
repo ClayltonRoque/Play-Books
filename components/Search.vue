@@ -47,11 +47,6 @@ export default defineComponent({
 
   form {
     width: 100%;
-
-    input {
-      // padding: 1rem 1rem;
-      // padding: 0.75rem 1rem;
-    }
   }
 }
 </style>
