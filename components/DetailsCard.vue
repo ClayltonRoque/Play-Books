@@ -2,14 +2,14 @@
   <div class="play-books-details-card card is-desktop has-base-profile">
     <div class="card-content">
       <header class="card-header pb-2" style="justify-content: space-between;">
-        <a
-          class="has-text-brand-blue button-details is-size-6 is-uppercase"
-          @click="hasHistory() ? $router.back() : $router.push('/')"
+        <button
+          class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
+          @click="goToPrev"
         >
           voltar
-        </a>
+        </button>
         <a
-          class="has-text-brand-blue button-details is-size-6 is-uppercase"
+          class="preview has-text-brand-blue button-details preview is-size-6 is-uppercase"
           :href="details.volumeInfo.previewLink"
           target="_blank"
         >
@@ -152,7 +152,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  PropType,
+  useContext,
+  useRoute,
+} from '@nuxtjs/composition-api'
 import { useVolume } from '@/service/volume'
 
 export default defineComponent({
@@ -164,13 +169,19 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { imageThumbnail } = useVolume(props.details)
+    const nuxtContext = useContext()
+    const route = useRoute()
 
-    function hasHistory() {
-      return window.history.length > 1
+    const { imageThumbnail } = useVolume(props.details)
+    console.log(nuxtContext.from.value)
+
+    function goToPrev() {
+      const fromPath = nuxtContext.from.value?.fullPath
+      nuxtContext.redirect(fromPath || '/')
     }
+
     return {
-      hasHistory,
+      goToPrev,
       imageThumbnail,
     }
   },
@@ -181,11 +192,11 @@ export default defineComponent({
 .play-books-details-card {
   border: 1px solid #112131;
   &:hover {
-    border-color: #00acee;
+    border-color: $brand-blue;
   }
 
   .card-header-title {
-    border-bottom: 2px solid #00acee;
+    border-bottom: 2px solid $brand-blue;
   }
 
   .button-icon {
@@ -198,9 +209,13 @@ export default defineComponent({
   .button-details {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid transparent;
+  }
+
+  .preview {
+    padding: 7px 16px;
     &:hover {
-      border-color: #00acee;
+      text-decoration: underline;
+      color: $brand-blue !important;
     }
   }
 
