@@ -1,7 +1,7 @@
 <template>
   <div class="play-books-details-card card is-desktop has-base-profile">
     <div class="card-content">
-      <header class="card-header pb-2" style="justify-content: space-between;">
+      <header class="card-header pb-2" style="justify-content: space-between">
         <button
           class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
           @click="goToPrev"
@@ -27,16 +27,14 @@
             <img :src="imageThumbnail" />
           </figure>
           <figure v-else>
-            <img src="~/assets/no-image.png" />
+            <img src="../assets/no-image.png" />
           </figure>
         </div>
-        <div class="media-content" style="overflow: hidden;">
+        <div class="media-content" style="overflow: hidden">
           <div class="columns">
             <div class="column">
               <div class="content">
-                <p class="title is-size-5 has-text-base-title pb-2">
-                  Autor
-                </p>
+                <p class="title is-size-5 has-text-base-title pb-2">Autor</p>
 
                 <div
                   v-if="
@@ -53,9 +51,7 @@
             </div>
             <div class="column">
               <div class="content">
-                <p class="title is-size-5 has-text-base-title pb-2">
-                  Editora
-                </p>
+                <p class="title is-size-5 has-text-base-title pb-2">Editora</p>
                 <div
                   v-if="
                     details.volumeInfo.publisher &&
@@ -91,9 +87,7 @@
           <div class="columns">
             <div class="column">
               <div class="content">
-                <p class="title is-size-5 has-text-base-title pb-2">
-                  Idioma
-                </p>
+                <p class="title is-size-5 has-text-base-title pb-2">Idioma</p>
                 <div
                   v-if="
                     details.volumeInfo.language &&
@@ -127,9 +121,7 @@
             </div>
             <div class="column">
               <div class="content">
-                <p class="title is-size-5 has-text-base-title pb-2">
-                  Páginas
-                </p>
+                <p class="title is-size-5 has-text-base-title pb-2">Páginas</p>
                 <div
                   v-if="details.volumeInfo.pageCount"
                   class="subtitle has-text-base-subtitle"
@@ -143,25 +135,29 @@
         </div>
       </div>
       <div>
-        <button class="button is-align-content-center is-size-6">
-          ADICIONAR
-        </button>
+        <ButtonSaveBook
+          class="is-align-content-center is-size-6"
+          :book="details"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  useContext,
-  useRoute,
-} from '@nuxtjs/composition-api'
 import { useVolume } from '@/service/volume'
+import {
+defineComponent,
+PropType,
+useContext
+} from '@nuxtjs/composition-api'
+import ButtonSaveBook from '~/components/ButtonSaveBook.vue'
 
 export default defineComponent({
   name: 'PlayBookDetailsCard',
+  components: {
+    ButtonSaveBook,
+  },
   props: {
     details: {
       type: Object as PropType<BookDocument.Volume>,
@@ -170,10 +166,7 @@ export default defineComponent({
   },
   setup(props) {
     const nuxtContext = useContext()
-    const route = useRoute()
-
     const { imageThumbnail } = useVolume(props.details)
-    console.log(nuxtContext.from.value)
 
     function goToPrev() {
       const fromPath = nuxtContext.from.value?.fullPath
