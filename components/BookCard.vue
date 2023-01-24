@@ -4,13 +4,18 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left" style="max-width: 183px">
-            <figure
-              v-if="imageBook"
-              class="media"
-              style="border-top: 0; padding-top: 0"
-            >
-              <img :src="imageBook" />
-            </figure>
+            <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
+              <figure
+                v-if="imageThumbnail && imageThumbnail.length"
+                class="media"
+                style="border-top: 0; padding-top: 0"
+              >
+                <img :src="imageThumbnail" />
+              </figure>
+              <figure v-else>
+                <img src="../assets/no-image.png" />
+              </figure>
+            </Nuxt-link>
           </div>
           <div class="media-content" style="overflow: hidden">
             <div class="content">
@@ -71,10 +76,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { authors, imageThumbnail } = useVolume(props.book)
+    const { imageThumbnail } = useVolume(props.book)
 
     return {
-      authors,
       imageThumbnail,
     }
   },

@@ -23,10 +23,11 @@ export function useBookData() {
   async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.dispatch('siteData/block')
+
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
-          q: query,
+          q: query === "" ? query = "Livros famosos" : query,
           key: API_KEY,
           maxResults,
           startIndex,
