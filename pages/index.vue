@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useFetch } from '@nuxtjs/composition-api'
 
 import { useBookData } from '~/service/bookData'
 
@@ -27,7 +27,13 @@ export default defineComponent({
   name: 'PlayBookSearch',
   components: { PlayBookCard, NoPageContent },
   setup() {
-    const { books } = useBookData()
+    const { books, getDataBooks  } = useBookData()
+
+    useFetch(async () => {
+      if(books.value.length === 0) {
+        await getDataBooks("")
+      }
+    })
     return {
       books,
     }
