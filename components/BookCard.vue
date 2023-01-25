@@ -17,8 +17,8 @@
               </figure>
             </Nuxt-link>
           </div>
-          <div class="media-content" style="overflow: hidden">
-            <div class="content">
+          <div class="media-content" style="overflow: hidden; ">
+            <div class="content" style="margin-bottom: 2.5rem">
               <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
@@ -48,11 +48,13 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </p>
               </Nuxt-link>
-              <ButtonSaveBook class="mt-2" :book="book" />
             </div>
           </div>
         </div>
       </div>
+      <ButtonSaveBook
+    :book="book"
+    class="mt-2" style="position: absolute; bottom: 1rem; right: 0.5rem;"/>
     </div>
   </div>
 </template>

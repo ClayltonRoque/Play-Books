@@ -18,7 +18,7 @@
         <div class="navbar-start">
           <Nuxt-link to="/" class="navbar-item">Home</Nuxt-link>
 
-          <Nuxt-link to="/favorites" class="navbar-item">Favoritos</Nuxt-link>
+          <Nuxt-link to="/favorites" class="navbar-item">Favoritos<span class="favorites-notification">{{ favoriteBooks.length }}</span></Nuxt-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
             <div class="navbar-dropdown">
@@ -35,13 +35,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import Search from '../components/Search.vue'
+import { defineComponent } from '@nuxtjs/composition-api';
+import { useBookData } from '~/service/bookData';
+import Search from '../components/Search.vue';
 
 export default defineComponent({
   name: 'PlayBookNavBar',
   components: { Search },
-  setup() {},
+  setup() {
+    const { favoriteBooks } = useBookData()
+
+    return {
+      favoriteBooks
+    }
+  },
 })
 </script>
 
@@ -69,5 +76,17 @@ export default defineComponent({
       font-size: 1.25rem;
     }
   }
+
+  .favorites-notification {
+      background: red;
+      color: white;
+      font-size: 0.7rem;
+      width: fit-content;
+      border-radius: 0.8rem;
+      padding: 0.1rem 0.4rem;
+      position: absolute;
+      top: -0.001rem;
+      right: -0.3rem;
+    }
 }
 </style>
