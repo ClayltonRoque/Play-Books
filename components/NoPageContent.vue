@@ -5,13 +5,16 @@
         <figure>
           <img src="~/assets/no-search.png" />
         </figure>
-        <p class="title is-size-5 has-text-base-title pb-2">
+        <p v-if="notfound === 'true'" class="title is-size-5 has-text-base-title pb-2">
           <button
             class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
             @click="goToHome"
           >
             Página não encontrada, voltar para home!
           </button>
+        </p>
+        <p v-else class="title is-size-5 has-text-base-title pb-2">
+          {{ title }}
         </p>
         <p class="subtitle has-text-base-subtitle">
           Pesquise e navegue pela lista de livros do Google Play Books
@@ -26,6 +29,16 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'PlayBooksNoPage',
+    props: {
+      title: {
+        type: String,
+        required: true,
+      },
+      notfound:{
+        type: String,
+        required: true,
+      }
+  },
   setup() {
     const nuxtContext = useContext()
 

@@ -50,5 +50,9 @@ export default defineComponent({
   form {
     width: 100%;
   }
+
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
 }
 </style>
