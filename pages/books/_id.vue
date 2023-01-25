@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-else>
-     <NoPageContent title="Página não encontrada!"/>
+     <NoPageContent/>
     </div>
   </section>
 </template>
