@@ -12,7 +12,7 @@
       />
     </div>
     <div v-else >
-      <NoPageContent title="Você ainda não adicionou favoritos"/>
+      <NoPageContent title="Você ainda não adicionou favoritos" notfound="false"/>
     </div>
   </section>
 </template>

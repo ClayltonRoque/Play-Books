@@ -9,7 +9,7 @@
       />
     </div>
     <div v-else>
-      <NoPageContent title="Você ainda não pesquisou livros"/>
+      <NoPageContent title="Você ainda não pesquisou livros" notfound="false"/>
     </div>
   </section>
 </template>
