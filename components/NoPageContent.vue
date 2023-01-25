@@ -6,7 +6,12 @@
           <img src="~/assets/no-search.png" />
         </figure>
         <p class="title is-size-5 has-text-base-title pb-2">
-          {{ title }}
+          <button
+            class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
+            @click="goToHome"
+          >
+            Página não encontrada, voltar para home!
+          </button>
         </p>
         <p class="subtitle has-text-base-subtitle">
           Pesquise e navegue pela lista de livros do Google Play Books
@@ -17,16 +22,21 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'PlayBooksNoPage',
-   props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
+  setup() {
+    const nuxtContext = useContext()
+
+    function goToHome() {
+      nuxtContext.redirect('/')
+    }
+
+    return {
+      goToHome
+    }
+  }
 })
 </script>
 

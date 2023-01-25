@@ -48,5 +48,10 @@ export default defineComponent({
     display: flex;
     cursor: pointer;
   }
+
+  .card-header-title {
+    border-bottom: 2px solid $brand-blue;
+    margin-left: 1.5rem
+  }
 }
 </style>
