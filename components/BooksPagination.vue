@@ -2,7 +2,7 @@
   <section>
     <hr />
     <b-pagination
-      v-model="current"
+      v-model="state.page"
       :total="state.total"
       :range-before="state.rangeBefore"
       :range-after="state.rangeAfter"
@@ -18,17 +18,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, watch } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, watch } from '@nuxtjs/composition-api'
 
 import { useBookData } from '~/service/bookData'
 
 export default defineComponent({
-  name: 'PaginaOfBooks',
+  name: 'BooksPagination',
 
   setup() {
     const { totalBooks, getDataBooks, querySearch } = useBookData()
 
     const state = reactive({
+      page: 1,
       total: totalBooks,
       perPage: 20,
       rangeBefore: 2,
@@ -36,20 +37,22 @@ export default defineComponent({
       order: 'is-centered',
     })
 
-    const current = ref(0)
+    watch(
+      () => state.page,
+      (nextCurrentPage) => {
+        let startIndex = 0
+        const query = querySearch.value.toString()
 
-    const query = querySearch
+        if (nextCurrentPage > 1) {
+          startIndex = (nextCurrentPage - 1) * state.perPage
+        }
 
-    watch(current, (currentValue) => {
-      const startIndex =
-        currentValue === 1 ? (currentValue = 0) : currentValue * 20 - 20
-      const maxResults = 20
-      getDataBooks(query.value.toString(), startIndex, maxResults)
-    })
+        getDataBooks(query, startIndex)
+      }
+    )
 
     return {
       state,
-      current,
     }
   },
 })

@@ -1,4 +1,4 @@
-import { computed, useContext, useStore, ref } from '@nuxtjs/composition-api'
+import { computed, useContext, useStore } from '@nuxtjs/composition-api'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
@@ -36,13 +36,20 @@ export function useBookData() {
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
-          q: query === '' ? (query = 'Livros famosos') : query,
+          q: !query ? 'Livros Famosos' : 'intitle:' + query,
           key: API_KEY,
           maxResults,
           startIndex,
         },
       })
-      store.commit('bookData/TOTAL_BOOKS', 200)
+
+      if (!data.items) {
+        data.items = []
+      }
+
+      if (!startIndex) {
+        store.commit('bookData/TOTAL_BOOKS', data.totalItems)
+      }
 
       store.commit('bookData/SAVE_BOOKS', data.items)
     } catch (error) {
