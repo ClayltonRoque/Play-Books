@@ -27,7 +27,7 @@
             <img :src="imageThumbnail" />
           </figure>
           <figure v-else>
-            <img src="../assets/no-image.png" />
+            <img src="@/assets/no-image.png" />
           </figure>
         </div>
         <div class="media-content">
