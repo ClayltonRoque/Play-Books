@@ -1,4 +1,4 @@
-import { computed, useContext, useStore } from '@nuxtjs/composition-api'
+import { computed, useContext, useStore, ref } from '@nuxtjs/composition-api'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
@@ -20,21 +20,30 @@ export function useBookData() {
     return store.state.bookData.favoritesBooks
   })
 
+  const totalBooks = computed(() => {
+    return store.state.bookData.totalBooks
+  })
+
+  const querySearch = computed(() => {
+    return store.state.bookData.query
+  })
+
   async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.dispatch('siteData/block')
+    store.commit('bookData/QUERY_SEARCH', query)
 
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
-          q: query === "" ? query = "Livros famosos" : query,
+          q: query === '' ? (query = 'Livros famosos') : query,
           key: API_KEY,
           maxResults,
           startIndex,
         },
       })
+      store.commit('bookData/TOTAL_BOOKS', 200)
 
-      // const volumes = data.items.map((volume: any) =>  volume.volumeInfo );
       store.commit('bookData/SAVE_BOOKS', data.items)
     } catch (error) {
       console.log('Não foi possível buscar informações com o servidor')
@@ -61,6 +70,8 @@ export function useBookData() {
   return {
     books,
     favoriteBooks,
+    totalBooks,
+    querySearch,
     alreadyfavorite,
     getDataBooks,
     saveBooks,
