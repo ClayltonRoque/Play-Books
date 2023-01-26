@@ -8,7 +8,7 @@
         class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
       />
     </div>
-    <PaginacaoOfBooks v-if="state.activePaginacao" />
+    <BooksPagination v-if="state.activePagination" />
     <div v-else>
       <NoPageContent title="Você ainda não pesquisou livros" notfound="false"/>
     </div>
@@ -24,19 +24,19 @@ import PlayBookCard from '~/components/BookCard.vue'
 
 import NoPageContent from '~/components/NoPageContent.vue'
 
-import PaginacaoOfBooks from '~/components/PaginacaoOfBooks.vue'
+import BooksPagination from '~/components/BooksPagination.vue'
 
 export default defineComponent({
   name: 'PlayBookSearch',
-  components: { PlayBookCard, NoPageContent, PaginacaoOfBooks },
+  components: { PlayBookCard, NoPageContent, BooksPagination },
   setup() {
     const { books } = useBookData()
     const state = reactive({
-      activePaginacao: false,
+      activePagination: false,
     })
     watch(books, () => {
       if (books.value.length) {
-        state.activePaginacao = true
+        state.activePagination = true
       }
     })
     return {
