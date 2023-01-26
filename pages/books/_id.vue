@@ -5,11 +5,9 @@
         <DetailsCard :details="details" />
       </div>
       <div class="details-content">
-        <p class="title is-size-5 has-text-base-title pb-2">
-          {{ details?.volumeInfo.title }}
+        <p class="title is-size-5 has-text-base-title pb-2" v-html="details?.volumeInfo.title">
         </p>
-        <div class="subtitle has-text-base-subtitle">
-          {{ details?.volumeInfo.description }}
+        <div class="subtitle has-text-base-subtitle" v-html="details?.volumeInfo.description">
         </div>
       </div>
     </div>
