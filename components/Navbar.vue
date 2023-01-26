@@ -75,6 +75,7 @@ export default defineComponent({
   }
   .navbar-menu {
     flex-grow: 0;
+    background: $base-post;
     .navbar-item {
       font-size: 1.25rem;
       color: #f0f5fa;

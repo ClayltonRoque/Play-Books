@@ -1,7 +1,7 @@
 <template>
   <div class="play-books-details-card card is-desktop has-base-profile">
     <div class="card-content">
-      <header class="card-header pb-2" style="justify-content: space-between">
+      <header class="card-header pb-2">
         <button
           class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
           @click="goToPrev"
@@ -30,7 +30,7 @@
             <img src="../assets/no-image.png" />
           </figure>
         </div>
-        <div class="media-content" style="overflow: hidden">
+        <div class="media-content">
           <div class="columns">
             <div class="column">
               <div class="content">
@@ -188,6 +188,10 @@ export default defineComponent({
     border-color: $brand-blue;
   }
 
+  .card-header {
+    justify-content: space-between;
+  }
+
   .card-header-title {
     border-bottom: 2px solid $brand-blue;
   }
@@ -240,6 +244,10 @@ export default defineComponent({
   }
 
   .media {
+    .media-content {
+      overflow: hidden;
+    }
+
     @media (max-width: 380px) {
       flex-wrap: wrap;
       gap: 1rem;
