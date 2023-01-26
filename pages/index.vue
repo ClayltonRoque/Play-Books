@@ -8,6 +8,7 @@
         class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
       />
     </div>
+    <PaginacaoOfBooks v-if="state.activePaginacao" />
     <div v-else>
       <NoPageContent title="Você ainda não pesquisou livros" notfound="false"/>
     </div>
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useFetch } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, watch } from '@nuxtjs/composition-api'
 
 import { useBookData } from '~/service/bookData'
 
@@ -23,19 +24,24 @@ import PlayBookCard from '~/components/BookCard.vue'
 
 import NoPageContent from '~/components/NoPageContent.vue'
 
+import PaginacaoOfBooks from '~/components/PaginacaoOfBooks.vue'
+
 export default defineComponent({
   name: 'PlayBookSearch',
-  components: { PlayBookCard, NoPageContent },
+  components: { PlayBookCard, NoPageContent, PaginacaoOfBooks },
   setup() {
-    const { books, getDataBooks  } = useBookData()
-
-    useFetch(async () => {
-      if(books.value.length === 0) {
-        await getDataBooks("")
+    const { books } = useBookData()
+    const state = reactive({
+      activePaginacao: false,
+    })
+    watch(books, () => {
+      if (books.value.length) {
+        state.activePaginacao = true
       }
     })
     return {
       books,
+      state,
     }
   },
 })
