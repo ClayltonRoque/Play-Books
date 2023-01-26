@@ -7,10 +7,10 @@
     <div class="container">
       <div class="navbar-brand is-align-items-center">
         <Nuxt-link to="/" class="navbar-item logo-item">
-          <img src="../assets/play-books-logo.png" />
+          <img src="@/assets/play-books-logo.png" />
         </Nuxt-link>
         <Nuxt-link to="/" class="navbar-item logo-book">
-          <img src="../assets/book-logo.png" />
+          <img src="@/assets/book-logo.png" />
         </Nuxt-link>
         <div class="content-search">
           <Search />

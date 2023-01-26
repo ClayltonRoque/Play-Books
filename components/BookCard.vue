@@ -3,7 +3,7 @@
     <div class="card is-desktop">
       <div class="card-content">
         <div class="media">
-          <div class="media-left" style="max-width: 183px">
+          <div class="media-left">
             <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
               <figure
                 v-if="imageThumbnail && imageThumbnail.length"
@@ -13,12 +13,12 @@
                 <img :src="imageThumbnail" />
               </figure>
               <figure v-else>
-                <img src="../assets/no-image.png" />
+                <img src="@/assets/no-image.png" />
               </figure>
             </Nuxt-link>
           </div>
-          <div class="media-content" style="overflow: hidden; ">
-            <div class="content" style="margin-bottom: 2.5rem">
+          <div class="media-content">
+            <div class="content">
               <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
                 <p class="title title-card is-size-4 has-text-base-title">
                   {{ book.volumeInfo.title }}
@@ -52,9 +52,7 @@
           </div>
         </div>
       </div>
-      <ButtonSaveBook
-    :book="book"
-    class="mt-2" style="position: absolute; bottom: 1rem; right: 0.5rem;"/>
+      <ButtonSaveBook :book="book"/>
     </div>
   </div>
 </template>
@@ -140,11 +138,21 @@ export default defineComponent({
     -webkit-line-clamp: 3;
   }
   .card {
-    // height: 254px;
     max-width: 392px;
     border: 1px solid #112131;
     &:hover {
       border-color: #00acee;
+    }
+    .media {
+      .media-left {
+        max-width: 183px;
+      }
+      .media-content {
+        overflow: hidden; 
+        .content {
+          margin-bottom: 2.5rem;
+        }
+      }
     }
 
     @media (max-width: 768px) {

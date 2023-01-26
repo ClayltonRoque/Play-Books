@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="play-book-button-save mt-2" >
     <button
       v-if="!alreadyfavorite(book)"
       class="button is-align-content-center is-size-6"
@@ -41,3 +41,12 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss">
+  .play-book-button-save {
+    position: absolute; 
+    bottom: 1rem; 
+    right: 0.5rem;
+  }
+
+</style>
