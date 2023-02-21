@@ -11,8 +11,11 @@
         class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
       />
     </div>
-    <div v-else >
-      <NoPageContent title="Você ainda não adicionou favoritos" notfound="false"/>
+    <div v-else>
+      <NoPageContent
+        title="Você ainda não adicionou favoritos"
+        notfound="false"
+      />
     </div>
   </section>
 </template>
@@ -30,7 +33,7 @@ export default defineComponent({
   name: 'PlayBookFavorites',
   components: {
     PlayBookCard,
-    NoPageContent
+    NoPageContent,
   },
   setup() {
     const { favoriteBooks } = useBookData()

@@ -44,7 +44,7 @@ export default defineComponent({
         const query = querySearch.value.toString()
 
         if (nextCurrentPage > 1) {
-          startIndex = (nextCurrentPage - 1) * state.perPage
+          startIndex = (nextCurrentPage - 1) * state.page
         }
 
         getDataBooks(query, startIndex)

@@ -8,9 +8,9 @@
         class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
       />
     </div>
-    <BooksPagination v-if="state.activePagination" />
+    <BooksPagination v-if="totalBooks" />
     <div v-else>
-      <NoPageContent title="Você ainda não pesquisou livros" notfound="false"/>
+      <NoPageContent title="Você ainda não pesquisou livros" notfound="false" />
     </div>
   </section>
 </template>
@@ -30,7 +30,7 @@ export default defineComponent({
   name: 'PlayBookSearch',
   components: { PlayBookCard, NoPageContent, BooksPagination },
   setup() {
-    const { books } = useBookData()
+    const { books, totalBooks } = useBookData()
     const state = reactive({
       activePagination: false,
     })
@@ -41,6 +41,7 @@ export default defineComponent({
     })
     return {
       books,
+      totalBooks,
       state,
     }
   },
@@ -53,11 +54,6 @@ export default defineComponent({
   .play-book-card {
     display: flex;
     cursor: pointer;
-  }
-
-  .card-header-title {
-    border-bottom: 2px solid $brand-blue;
-    margin-left: 1.5rem
   }
 }
 </style>
