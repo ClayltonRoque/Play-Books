@@ -19,7 +19,7 @@
 
       <div class="navbar-menu is-active">
         <div class="navbar-start">
-          <Nuxt-link to="/" class="navbar-item">Home</Nuxt-link>
+          <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
 
           <Nuxt-link to="/favorites" class="navbar-item"
             >Favoritos<span class="favorites-notification">{{

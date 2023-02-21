@@ -1,11 +1,11 @@
 <template>
-  <div class="play-book-button-save mt-2" >
+  <div class="play-book-button-save mt-2">
     <button
       v-if="!alreadyfavorite(book)"
       class="button is-align-content-center is-size-6"
       @click="saveBooks(book)"
     >
-      Favoritar
+      Favoritar <fa class="pl-1" icon="fa-solid fa-heart-circle-plus" />
     </button>
     <button
       v-else
@@ -13,6 +13,7 @@
       @click="removeBook(book)"
     >
       Remover
+      <fa class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
     </button>
   </div>
 </template>
@@ -43,10 +44,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-  .play-book-button-save {
-    position: absolute; 
-    bottom: 1rem; 
-    right: 0.5rem;
-  }
-
+.play-book-button-save {
+  position: absolute;
+  bottom: 1rem;
+  right: 0.5rem;
+}
 </style>
