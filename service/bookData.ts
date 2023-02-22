@@ -1,4 +1,9 @@
-import { computed, useContext, useStore } from '@nuxtjs/composition-api'
+import {
+  computed,
+  useContext,
+  useStore,
+  reactive,
+} from '@nuxtjs/composition-api'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
@@ -28,6 +33,13 @@ export function useBookData() {
     return store.state.bookData.query
   })
 
+  const state = reactive({
+    personalizeType: {
+      typeSearch: 'Titulo',
+      typePagination: 'Paginação Simples',
+    },
+  })
+
   async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.dispatch('siteData/block')
@@ -36,7 +48,9 @@ export function useBookData() {
     try {
       const data = await nuxtContext.$axios.$get('volumes', {
         params: {
-          q: !query ? 'Livros Famosos' : 'intitle:' + query,
+          q: !query
+            ? 'Livros Famosos'
+            : store.state.bookData.personalizeSite.typeSearch + query,
           key: API_KEY,
           maxResults,
           startIndex,
@@ -74,11 +88,25 @@ export function useBookData() {
     return favoriteBook
   }
 
+  function personalizeSite(personalizeSite: StateBook['personalizeSite']) {
+    if (personalizeSite.typeSearch === 'Titulo') {
+      state.personalizeType.typeSearch = 'intitle:'
+    }
+    if (personalizeSite.typeSearch === 'Autor') {
+      state.personalizeType.typeSearch = 'inauthor:'
+    }
+    if (personalizeSite.typeSearch === 'ISBN') {
+      state.personalizeType.typeSearch = 'isbn:'
+    }
+    store.commit('bookData/PERSONALIZE_SITE', state.personalizeType)
+  }
+
   return {
     books,
     favoriteBooks,
     totalBooks,
     querySearch,
+    personalizeSite,
     alreadyfavorite,
     getDataBooks,
     saveBooks,

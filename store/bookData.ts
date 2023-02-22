@@ -3,6 +3,10 @@ export interface StateProps {
   favoritesBooks: BookDocument.Volume[]
   totalBooks: Number
   query: String
+  personalizeSite: {
+    typeSearch: String
+    typePagination: String
+  }
 }
 
 const state = (): StateProps => ({
@@ -10,6 +14,10 @@ const state = (): StateProps => ({
   favoritesBooks: [],
   totalBooks: 0,
   query: '',
+  personalizeSite: {
+    typeSearch: 'intitle:',
+    typePagination: 'Paginação Simples',
+  },
 })
 
 const mutations = {
@@ -28,6 +36,9 @@ const mutations = {
   },
   QUERY_SEARCH(state: StateProps, payload: String) {
     state.query = payload
+  },
+  PERSONALIZE_SITE(state: StateProps, payload: StateProps['personalizeSite']) {
+    state.personalizeSite.typeSearch = payload.typeSearch
   },
 }
 
