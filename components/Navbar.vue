@@ -26,6 +26,54 @@
               favoriteBooks.length
             }}</span></Nuxt-link
           >
+
+          <a class="navbar-item" @click="state.isActive = true">Menu</a>
+
+          <div :class="{ 'is-active': state.isActive }" class="modal">
+            <div class="modal-background" @click="state.isActive = false"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Menu</p>
+                <button
+                  class="delete"
+                  aria-label="close"
+                  @click="state.isActive = false"
+                ></button>
+              </header>
+              <section class="modal-card-body">
+                <label class="label">Filtragem de Pesquisa</label>
+                <div class="select">
+                  <select v-model="state.personalizeSite.typeSearch">
+                    <option selected>Titulo</option>
+                    <option>Autor</option>
+                    <option>ISBN</option>
+                  </select>
+                </div>
+
+                <label class="label">Modelo de Paginação</label>
+                <div class="select">
+                  <select v-model="state.personalizeSite.typePagination">
+                    <option selected>Paginação Simples</option>
+                    <option>Rolagem Infinita</option>
+                  </select>
+                </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button
+                  class="button is-success"
+                  @click="
+                    personalizeSite(state.personalizeSite),
+                      (state.isActive = false)
+                  "
+                >
+                  Salvar
+                </button>
+                <button class="button" @click="state.isActive = false">
+                  Cancelar
+                </button>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,18 +81,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, reactive } from '@nuxtjs/composition-api'
 import { useBookData } from '~/service/bookData'
 import Search from '../components/Search.vue'
+import { StateProps as StateBook } from '~/store/bookData'
+
+export interface StateProps {
+  bookData: StateBook
+}
 
 export default defineComponent({
   name: 'PlayBookNavBar',
   components: { Search },
+
   setup() {
-    const { favoriteBooks } = useBookData()
+    const { favoriteBooks, personalizeSite } = useBookData()
+
+    const state = reactive({
+      isActive: false,
+      personalizeSite: {
+        typeSearch: 'Titulo',
+        typePagination: 'Paginação Simples',
+      },
+    })
 
     return {
       favoriteBooks,
+      state,
+      personalizeSite,
     }
   },
 })
