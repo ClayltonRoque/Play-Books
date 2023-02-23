@@ -19,46 +19,56 @@
           </div>
           <div class="media-content">
             <div class="content">
-              <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
-                <p class="title title-card is-size-4 has-text-base-title">
-                  {{ book.volumeInfo.title }}
+              <!-- <Nuxt-link
+                :to="{ name: 'books-id', params: { id: book.id } }"
+              > -->
+              <p class="title title-card is-size-4 has-text-base-title">
+                {{ book.volumeInfo.title }}
+              </p>
+              <div
+                v-if="book.volumeInfo.authors && book.volumeInfo.authors.length"
+              >
+                <p class="subtitle subtitle-card has-text-base-subtitle">
+                  {{ book.volumeInfo.authors[0] }}
                 </p>
-                <div
-                  v-if="
-                    book.volumeInfo.authors && book.volumeInfo.authors.length
-                  "
-                >
-                  <p class="subtitle subtitle-card has-text-base-subtitle">
-                    {{ book.volumeInfo.authors[0] }}
-                  </p>
-                </div>
-                <p v-else class="subtitle subtitle-card has-text-base-subtitle">
-                  Author
-                </p>
-                <p
-                  v-if="book.volumeInfo.description"
-                  class="description description-card has-text-base-text is-size-6"
-                >
-                  {{ book.volumeInfo.description }}
-                </p>
-                <p
+              </div>
+              <p v-else class="subtitle subtitle-card has-text-base-subtitle">
+                Author
+              </p>
+              <!-- Transição Básica -->
+              <p
+                v-if="book.volumeInfo.description"
+                ref="description"
+                key="description-card"
+                class="description description-card has-text-base-text is-size-6"
+              >
+                {{ book.volumeInfo.description }}
+              </p>
+              <button @click="toggleSeenLess">Ler Menos</button>
+              <!-- <p
                   v-else
                   class="description description-card has-text-base-text is-size-6"
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-              </Nuxt-link>
+                </p> -->
+              <!-- </Nuxt-link> -->
             </div>
           </div>
         </div>
       </div>
-      <ButtonSaveBook :book="book"/>
+      <ButtonSaveBook :book="book" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  PropType,
+  reactive,
+  ref,
+} from '@nuxtjs/composition-api'
+import gsap from 'gsap'
 
 import ButtonSaveBook from '~/components/ButtonSaveBook.vue'
 
@@ -77,9 +87,27 @@ export default defineComponent({
   },
   setup(props) {
     const { imageThumbnail } = useVolume(props.book)
+    const description = ref<HTMLElement>()
+
+    const state = reactive({
+      seenLess: false,
+    })
+
+    function toggleSeenLess() {
+      state.seenLess = !state.seenLess
+      if (description.value) {
+        gsap.to(description.value, {
+          opacity: state.seenLess ? 0 : 1,
+          duration: 1,
+        })
+      }
+    }
 
     return {
+      state,
+      description,
       imageThumbnail,
+      toggleSeenLess,
     }
   },
 })
@@ -96,10 +124,6 @@ export default defineComponent({
     height: 200px;
     width: 100%;
     max-width: 150px;
-
-    &:hover {
-      border-color: #00acee;
-    }
 
     &:disabled {
       opacity: 0;
@@ -148,7 +172,7 @@ export default defineComponent({
         max-width: 183px;
       }
       .media-content {
-        overflow: hidden; 
+        overflow: hidden;
         .content {
           margin-bottom: 2.5rem;
         }
@@ -158,6 +182,23 @@ export default defineComponent({
     @media (max-width: 768px) {
       max-width: 350px;
     }
+  }
+  .read-less-leave-active {
+    transition: all 1s ease;
+  }
+
+  .read-less-leave-to {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  .read-less-enter-active {
+    transform: translateY(50%);
+    opacity: 0;
+    transition: all 1s ease;
+  }
+  .read-less-enter-to {
+    transform: translateY(0%);
+    opacity: 1;
   }
 }
 </style>
