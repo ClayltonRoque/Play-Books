@@ -21,6 +21,10 @@ export function useBookData() {
     return store.state.bookData.books
   })
 
+  const listOfBooks = computed(() => {
+    return store.state.bookData.listOfBooks
+  })
+
   const favoriteBooks = computed(() => {
     return store.state.bookData.favoritesBooks
   })
@@ -31,6 +35,10 @@ export function useBookData() {
 
   const querySearch = computed(() => {
     return store.state.bookData.query
+  })
+
+  const personalization = computed(() => {
+    return store.state.bookData.personalizeSite
   })
 
   const state = reactive({
@@ -65,6 +73,7 @@ export function useBookData() {
       }
 
       store.commit('bookData/SAVE_BOOKS', data.items)
+      store.commit('bookData/SAVE_BOOKS_IN_LIST', data.items)
     } catch (error) {
       console.log('Não foi possível buscar informações com o servidor')
     }
@@ -95,15 +104,25 @@ export function useBookData() {
     if (personalizeSite.typeSearch === 'ISBN') {
       state.personalizeType.typeSearch = 'isbn:'
     }
+
+    if (personalizeSite.typePagination === 'Paginação Simples') {
+      state.personalizeType.typePagination = 'Paginação Simples'
+    }
+
+    if (personalizeSite.typePagination === 'Rolagem Infinita') {
+      state.personalizeType.typePagination = 'Rolagem Infinita'
+    }
     store.commit('bookData/PERSONALIZE_SITE', state.personalizeType)
   }
 
   return {
     books,
+    listOfBooks,
     favoriteBooks,
     totalBooks,
     querySearch,
     personalizeSite,
+    personalization,
     alreadyfavorite,
     getDataBooks,
     saveBooks,
