@@ -18,8 +18,19 @@
           <PlayBookCard :book="book" class="play-book-card" />
         </div>
       </TransitionGroup>
+    <div v-if="books.length" class="columns is-multiline align-items-full py-5">
+      <PlayBookCard
+        v-for="(book, index) in books"
+        :key="index"
+        :book="book"
+        class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
+      />
+      <infinite-loading
+        :v-infinite-scroll-disabled="preventMoreRequest"
+        @infinite="loadMore"
+      ></infinite-loading>
     </div>
-    <BooksPagination v-if="totalBooks" />
+
     <div v-else>
       <NoPageContent title="Você ainda não pesquisou livros" notfound="false" />
     </div>
@@ -27,28 +38,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch } from '@nuxtjs/composition-api'
-import gsap from 'gsap'
 
+
+import { defineComponent, reactive, computed } from '@nuxtjs/composition-api'
+import gsap from 'gsap'
 import { useBookData } from '~/service/bookData'
 
 import PlayBookCard from '~/components/BookCard.vue'
 import NoPageContent from '~/components/NoPageContent.vue'
-import BooksPagination from '~/components/BooksPagination.vue'
+
 
 export default defineComponent({
   name: 'PlayBookSearch',
-  components: { PlayBookCard, NoPageContent, BooksPagination },
+  components: { PlayBookCard, NoPageContent },
   setup() {
-    const { books, totalBooks } = useBookData()
-    const state = reactive({
-      activePagination: false,
-    })
+    const { books, totalBooks, getDataBooks } = useBookData()
 
-    watch(books, () => {
-      if (books.value.length) {
-        state.activePagination = true
-      }
+    const state = reactive({
+      pageCount: 0,
+      pageDisabled: true,
     })
 
     function onBeforeEnter(el: any) {
@@ -78,6 +86,16 @@ export default defineComponent({
       // })
     }
 
+    const preventMoreRequest = computed(() => {
+      return state.pageDisabled
+    })
+
+    async function loadMore() {
+      await getDataBooks('re zero', state.pageCount)
+      state.pageDisabled = false
+      state.pageCount += 1
+      state.pageDisabled = true
+    }
     return {
       books,
       totalBooks,
@@ -85,6 +103,8 @@ export default defineComponent({
       onEnterCard,
       onBeforeEnter,
       onLeaveCard,
+      loadMore,
+      preventMoreRequest,
     }
   },
 })
