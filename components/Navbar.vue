@@ -4,6 +4,11 @@
     role="navigation"
     aria-label="main navigation"
   >
+    <div
+      class="backdrop"
+      :class="{ 'is-active': state.isHamburgerActive }"
+      @click="state.isHamburgerActive = !state.isHamburgerActive"
+    ></div>
     <div class="container">
       <div class="navbar-brand is-align-items-center">
         <Nuxt-link to="/" class="navbar-item logo-item">
@@ -15,9 +20,21 @@
         <div class="content-search">
           <Search />
         </div>
+        <a
+          class="navbar-burger"
+          :class="{ 'is-active': state.isHamburgerActive }"
+          @click="state.isHamburgerActive = !state.isHamburgerActive"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <div class="navbar-menu is-active">
+      <div
+        :class="{ 'is-active': state.isHamburgerActive }"
+        class="navbar-menu"
+      >
         <div class="navbar-start">
           <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
 
@@ -27,17 +44,20 @@
             }}</span></Nuxt-link
           >
 
-          <a class="navbar-item" @click="state.isActive = true">Menu</a>
+          <a class="navbar-item" @click="state.isModalActive = true">Menu</a>
 
-          <div :class="{ 'is-active': state.isActive }" class="modal">
-            <div class="modal-background" @click="state.isActive = false"></div>
+          <div :class="{ 'is-active': state.isModalActive }" class="modal">
+            <div
+              class="modal-background"
+              @click="state.isModalActive = false"
+            ></div>
             <div class="modal-card">
               <header class="modal-card-head">
                 <p class="modal-card-title">Menu</p>
                 <button
                   class="delete"
                   aria-label="close"
-                  @click="state.isActive = false"
+                  @click="state.isModalActive = false"
                 ></button>
               </header>
               <section class="modal-card-body">
@@ -63,12 +83,12 @@
                   class="button is-success"
                   @click="
                     personalizeSite(state.personalizeSite),
-                      (state.isActive = false)
+                      (state.isModalActive = false)
                   "
                 >
                   Salvar
                 </button>
-                <button class="button" @click="state.isActive = false">
+                <button class="button" @click="state.isModalActive = false">
                   Cancelar
                 </button>
               </footer>
@@ -98,7 +118,8 @@ export default defineComponent({
     const { favoriteBooks, personalizeSite } = useBookData()
 
     const state = reactive({
-      isActive: false,
+      isModalActive: false,
+      isHamburgerActive: false,
       personalizeSite: {
         typeSearch: 'Titulo',
         typePagination: 'Paginação Simples',
@@ -120,6 +141,20 @@ export default defineComponent({
   display: flex;
   align-items: center;
   height: 70px;
+  .backdrop {
+    @include touch {
+      opacity: 0;
+      transition: opacity 0.5s;
+      &.is-active {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 200;
+        background: #000;
+        opacity: 0.5;
+      }
+    }
+  }
 
   .navbar-brand {
     top: 0px;
@@ -149,6 +184,26 @@ export default defineComponent({
     }
   }
 
+  .navbar-menu {
+    @include touch {
+      display: block;
+      -webkit-overflow-scrolling: touch;
+      max-height: none !important;
+      overflow: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 201;
+      transition: all 0.5s;
+      transform: translateX(-100%);
+      &.is-active {
+        transform: translateX(0);
+        width: 70vw;
+      }
+    }
+  }
+
   .navbar-menu .navbar-start {
     overflow: hidden;
   }
@@ -165,7 +220,20 @@ export default defineComponent({
     right: 0.3rem;
   }
 
-  @media (max-width: 1024px) {
+  @include tablet {
+    .container {
+      display: flex;
+
+      .navbar-start {
+        display: flex;
+      }
+      .navbar-menu.is-active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+  }
+  @include mobile {
     .container {
       display: flex;
       .logo-item {
@@ -174,9 +242,6 @@ export default defineComponent({
       .logo-book {
         display: block;
         margin-left: 1rem;
-      }
-      .navbar-start {
-        display: flex;
       }
     }
   }

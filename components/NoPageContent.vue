@@ -59,6 +59,12 @@ export default defineComponent({
 <style lang="scss">
 .play-books-no-page {
   .no-page-content {
+    @include mobile {
+      .no-page {
+        margin: 0.5rem;
+        text-align: center;
+      }
+    }
     padding-top: 10rem;
     .no-page {
       display: flex;

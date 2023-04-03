@@ -26,6 +26,8 @@
     "nuxt-buefy": "^0.4.24",
     "save-dev": "^0.0.1-security",
     "vue": "^2.7.10",
+    "vue-infinite-loading": "^2.4.5",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "vuex-persistedstate": "^4.1.0"
