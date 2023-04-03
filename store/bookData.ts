@@ -1,5 +1,6 @@
 export interface StateProps {
   books: BookDocument.Volume[]
+  listOfBooks: BookDocument.Volume[]
   favoritesBooks: BookDocument.Volume[]
   totalBooks: Number
   query: String
@@ -11,6 +12,7 @@ export interface StateProps {
 
 const state = (): StateProps => ({
   books: [],
+  listOfBooks: [],
   favoritesBooks: [],
   totalBooks: 0,
   query: '',
@@ -23,6 +25,9 @@ const state = (): StateProps => ({
 const mutations = {
   SAVE_BOOKS(state: StateProps, payload: BookDocument.Volume[]) {
     state.books = payload
+  },
+  SAVE_BOOKS_IN_LIST(state: StateProps, payload: BookDocument.Volume[]) {
+    state.listOfBooks.push(...payload)
   },
   SAVE_BOOKS_FAVORITES(state: StateProps, payload: BookDocument.Volume) {
     state.favoritesBooks.push(payload)

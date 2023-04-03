@@ -25,8 +25,43 @@
         :book="book"
         class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
       />
+      <div v-if="state.paginationTypeSimple">
+        <div class="columns is-multiline align-items-full py-5">
+          <PlayBookCard
+            v-for="(book, index) in listOfBooks"
+            :key="index"
+            :book="book"
+            class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
+          />
+          <div>
+            <BooksPagination />
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <NoPageContent
+          title="Você ainda não pesquisou livros"
+          notfound="false"
+        />
+      </div>
+    </div>
+
+    <div v-if="state.paginationTypeInfinity">
+      <div class="columns is-multiline align-items-full py-5">
+        <PlayBookCard
+          v-for="(book, index) in listOfBooks"
+          :key="index"
+          :book="book"
+          class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
+        />
+      </div>
+
       <infinite-loading
+        v-if="books.length"
         :v-infinite-scroll-disabled="preventMoreRequest"
+        force-use-infinite-wrapper=".el-table__body-wrapper"
+        spinner="waveDots"
+        @distance="1"
         @infinite="loadMore"
       ></infinite-loading>
     </div>
@@ -52,11 +87,20 @@ export default defineComponent({
   name: 'PlayBookSearch',
   components: { PlayBookCard, NoPageContent },
   setup() {
-    const { books, totalBooks, getDataBooks } = useBookData()
+    const {
+      books,
+      totalBooks,
+      getDataBooks,
+      listOfBooks,
+      querySearch,
+      personalization,
+    } = useBookData()
 
     const state = reactive({
       pageCount: 0,
       pageDisabled: true,
+      paginationTypeSimple: false,
+      paginationTypeInfinity: false,
     })
 
     function onBeforeEnter(el: any) {
@@ -90,14 +134,27 @@ export default defineComponent({
       return state.pageDisabled
     })
 
-    async function loadMore() {
-      await getDataBooks('re zero', state.pageCount)
-      state.pageDisabled = false
-      state.pageCount += 1
-      state.pageDisabled = true
+    if (personalization.value.typePagination === 'Paginação Simples') {
+      state.paginationTypeInfinity = false
+      state.paginationTypeSimple = true
+    }
+
+    if (personalization.value.typePagination === 'Rolagem Infinita') {
+      state.paginationTypeSimple = false
+      state.paginationTypeInfinity = true
+    }
+
+    function loadMore() {
+      setTimeout(() => {
+        state.pageDisabled = false
+        state.pageCount += 20
+        getDataBooks(querySearch.value.toString(), state.pageCount)
+        state.pageDisabled = true
+      }, 1000)
     }
     return {
       books,
+      listOfBooks,
       totalBooks,
       state,
       onEnterCard,
