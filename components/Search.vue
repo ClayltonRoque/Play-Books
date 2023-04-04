@@ -22,7 +22,7 @@ import { useBookData } from '../service/bookData'
 export default defineComponent({
   name: 'PlayBookSearch',
   setup() {
-    const { getDataBooks } = useBookData()
+    const { getDataBooks, querySearch } = useBookData()
     const nuxtContext = useContext()
 
     const state = reactive({
@@ -36,6 +36,7 @@ export default defineComponent({
 
     return {
       state,
+      querySearch,
       getDataBooks,
       submit,
     }

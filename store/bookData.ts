@@ -43,7 +43,7 @@ const mutations = {
     state.query = payload
   },
   PERSONALIZE_SITE(state: StateProps, payload: StateProps['personalizeSite']) {
-    state.personalizeSite.typeSearch = payload.typeSearch
+    state.personalizeSite = payload
   },
 }
 
