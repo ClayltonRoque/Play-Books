@@ -113,6 +113,7 @@ export function useBookData() {
       state.personalizeType.typePagination = 'Rolagem Infinita'
     }
     store.commit('bookData/PERSONALIZE_SITE', state.personalizeType)
+    location.reload()
   }
 
   return {

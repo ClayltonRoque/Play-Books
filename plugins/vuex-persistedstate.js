@@ -3,6 +3,6 @@ import createPersistedState from 'vuex-persistedstate'
 export default ({ store }) => {
   createPersistedState({
     key: 'playBooks',
-    paths: ['bookData.favoritesBooks'],
+    paths: ['bookData.favoritesBooks', 'bookData.personalizeSite'],
   })(store)
 }

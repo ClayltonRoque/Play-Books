@@ -61,20 +61,19 @@
                 ></button>
               </header>
               <section class="modal-card-body">
+                <label class="label">Modelo de Paginação</label>
+                <div class="select">
+                  <select v-model="state.personalizeSite.typePagination">
+                    <option selected>Paginação Simples</option>
+                    <option>Rolagem Infinita</option>
+                  </select>
+                </div>
                 <label class="label">Filtragem de Pesquisa</label>
                 <div class="select">
                   <select v-model="state.personalizeSite.typeSearch">
                     <option selected>Titulo</option>
                     <option>Autor</option>
                     <option>ISBN</option>
-                  </select>
-                </div>
-
-                <label class="label">Modelo de Paginação</label>
-                <div class="select">
-                  <select v-model="state.personalizeSite.typePagination">
-                    <option selected>Paginação Simples</option>
-                    <option>Rolagem Infinita</option>
                   </select>
                 </div>
               </section>
@@ -125,7 +124,7 @@ export default defineComponent({
         typePagination: 'Paginação Simples',
       },
     })
-
+    console.log(personalizeSite)
     return {
       favoriteBooks,
       state,
