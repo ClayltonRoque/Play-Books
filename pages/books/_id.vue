@@ -5,26 +5,33 @@
         <DetailsCard :details="details" />
       </div>
       <div class="details-content">
-        <p class="title is-size-5 has-text-base-title pb-2" v-html="details?.volumeInfo.title">
-        </p>
-        <div class="subtitle has-text-base-subtitle" v-html="details?.volumeInfo.description">
-        </div>
+        <p
+          class="title is-size-5 has-text-base-title pb-2"
+          v-html="details?.volumeInfo.title"
+        ></p>
+        <div
+          class="subtitle has-text-base-subtitle"
+          v-html="details?.volumeInfo.description"
+        ></div>
       </div>
     </div>
     <div v-else>
-     <NoPageContent title="Página não encontrada, voltar para home!" notfound="true"/>
+      <NoPageContent
+        title="Página não encontrada, voltar para home!"
+        notfound="true"
+      />
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import {
-defineComponent,
-ref,
-useContext,
-useFetch,
-useRoute,
-useStore
+  defineComponent,
+  ref,
+  useContext,
+  useFetch,
+  useRoute,
+  useStore,
 } from '@nuxtjs/composition-api'
 import DetailsCard from '../../components/DetailsCard.vue'
 import NoPageContent from '../../components/NoPageContent.vue'
@@ -45,8 +52,8 @@ export default defineComponent({
         const { data } = await nuxtContext.$axios.get(`volumes/${params.id}`)
         details.value = data
       } catch (error) {
-        // nuxtContext.redirect('/')
         console.log('Não foi possível buscar informações com o servidor')
+        nuxtContext.redirect('/')
       } finally {
         store.dispatch('siteData/unBlock')
       }

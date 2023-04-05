@@ -23,6 +23,7 @@ export default defineComponent({
   name: 'PlayBookSearch',
   setup() {
     const { getDataBooks, querySearch } = useBookData()
+
     const nuxtContext = useContext()
 
     const state = reactive({
@@ -31,7 +32,8 @@ export default defineComponent({
 
     async function submit() {
       nuxtContext.redirect('/')
-      await getDataBooks(state.query)
+
+      await getDataBooks(state.query, 0, 20, true)
     }
 
     return {
