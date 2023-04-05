@@ -19,9 +19,6 @@
           </div>
           <div class="media-content">
             <div class="content">
-              <!-- <Nuxt-link
-                :to="{ name: 'books-id', params: { id: book.id } }"
-              > -->
               <p class="title title-card is-size-4 has-text-base-title">
                 {{ book.volumeInfo.title }}
               </p>
@@ -35,7 +32,6 @@
               <p v-else class="subtitle subtitle-card has-text-base-subtitle">
                 Author
               </p>
-              <!-- Transição Básica -->
               <p
                 v-if="book.volumeInfo.description"
                 ref="description"
@@ -44,14 +40,6 @@
               >
                 {{ book.volumeInfo.description }}
               </p>
-              <button @click="toggleSeenLess">Ler Menos</button>
-              <!-- <p
-                  v-else
-                  class="description description-card has-text-base-text is-size-6"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p> -->
-              <!-- </Nuxt-link> -->
             </div>
           </div>
         </div>

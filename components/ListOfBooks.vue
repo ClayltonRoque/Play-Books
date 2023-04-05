@@ -120,10 +120,18 @@ export default defineComponent({
       setTimeout(() => {
         state.pageDisabled = false
         state.pageCount += 20
-        getDataBooks(querySearch.value.toString(), state.pageCount)
+        const resetList = false
+        const number = 20
+        getDataBooks(
+          querySearch.value.toString(),
+          state.pageCount,
+          number,
+          resetList
+        )
         state.pageDisabled = true
       }, 1000)
     }
+
     return {
       books,
       listOfBooks,

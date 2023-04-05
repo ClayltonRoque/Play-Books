@@ -48,7 +48,12 @@ export function useBookData() {
     },
   })
 
-  async function getDataBooks(query: string, startIndex = 0, maxResults = 20) {
+  async function getDataBooks(
+    query: string,
+    startIndex = 0,
+    maxResults = 20,
+    resetList: boolean
+  ) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.commit('bookData/QUERY_SEARCH', query)
 
@@ -71,9 +76,13 @@ export function useBookData() {
       if (!startIndex) {
         store.commit('bookData/TOTAL_BOOKS', data.totalItems)
       }
+      if (resetList === false) {
+        store.commit('bookData/SAVE_BOOKS_IN_LIST', data.items)
+      } else {
+        store.commit('bookData/RESET_BOOKS_IN_LIST', [])
+      }
 
       store.commit('bookData/SAVE_BOOKS', data.items)
-      store.commit('bookData/SAVE_BOOKS_IN_LIST', data.items)
     } catch (error) {
       console.log('Não foi possível buscar informações com o servidor')
     }
