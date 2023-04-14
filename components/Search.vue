@@ -33,7 +33,11 @@ export default defineComponent({
     async function submit() {
       nuxtContext.redirect('/')
 
-      await getDataBooks(state.query, 0, 20, true)
+      const startIndex = 0
+
+      const resetList = true
+
+      await getDataBooks(state.query, startIndex, resetList)
     }
 
     return {

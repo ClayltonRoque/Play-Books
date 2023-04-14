@@ -51,8 +51,8 @@ export function useBookData() {
   async function getDataBooks(
     query: string,
     startIndex = 0,
-    maxResults = 20,
-    resetList: boolean
+    resetList?: boolean,
+    maxResults = 20
   ) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.commit('bookData/QUERY_SEARCH', query)
