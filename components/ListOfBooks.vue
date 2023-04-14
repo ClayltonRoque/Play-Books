@@ -1,48 +1,40 @@
 <template>
   <section class="play-books-home container" style="top: 86px">
     <div>
-      <div v-if="state.paginationTypeSimple">
-        <div class="columns is-multiline align-items-full py-5">
-          <TransitionGroup
-            class="columns is-multiline align-items-full py-5"
-            tag="div"
-            :css="false"
-            @before-enter="onBeforeEnter"
-            @leave="onLeaveCard"
-            @enter="onEnterCard"
-          >
+      <div class="columns is-multiline align-items-full py-5">
+        <TransitionGroup
+          class="columns is-multiline align-items-full py-5"
+          tag="div"
+          :css="false"
+          @before-enter="onBeforeEnter"
+          @leave="onLeaveCard"
+          @enter="onEnterCard"
+        >
+          <div class="columns is-multiline align-items-full py-5">
             <PlayBookCard
-              v-for="(book, index) in books"
+              v-for="(book, index) in listOfBooksBaseInTypePage"
               :key="index"
               :book="book"
               class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
             />
-          </TransitionGroup>
-        </div>
-        <div>
-          <BooksPagination />
-        </div>
-      </div>
-    </div>
+          </div>
 
-    <div v-if="state.paginationTypeInfinity">
-      <div class="columns is-multiline align-items-full py-5">
-        <PlayBookCard
-          v-for="(book, index) in listOfBooks"
-          :key="index"
-          :book="book"
-          class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
-        />
-      </div>
+          <div v-if="">
+            <infinite-loading
+              v-if="books.length"
+              :v-infinite-scroll-disabled="preventMoreRequest"
+              force-use-infinite-wrapper=".el-table__body-wrapper"
+              spinner="waveDots"
+              @distance="1"
+              @infinite="loadMore"
+            ></infinite-loading>
+          </div>
 
-      <infinite-loading
-        v-if="books.length"
-        :v-infinite-scroll-disabled="preventMoreRequest"
-        force-use-infinite-wrapper=".el-table__body-wrapper"
-        spinner="waveDots"
-        @distance="1"
-        @infinite="loadMore"
-      ></infinite-loading>
+          <div>
+            <BooksPagination />
+          </div>
+        </TransitionGroup>
+      </div>
     </div>
   </section>
 </template>
@@ -82,16 +74,25 @@ export default defineComponent({
       return state.pageDisabled
     })
 
-    if (personalization.value.typePagination === 'Paginação Simples') {
-      state.paginationTypeInfinity = false
-      state.paginationTypeSimple = true
-    }
+    const listOfBooksBaseInTypePage = computed(() => {
+      if (state.paginationTypeSimple === true) {
+        return books
+      }
+      if (state.paginationTypeInfinity === true) {
+        return listOfBooks
+      }
+    })
+    const typeOfPagination = computed(() => {
+      if (personalization.value.typePagination === 'Paginação Simples') {
+        state.paginationTypeInfinity = false
+        state.paginationTypeSimple = true
+      }
 
-    if (personalization.value.typePagination === 'Rolagem Infinita') {
-      state.paginationTypeSimple = false
-      state.paginationTypeInfinity = true
-    }
-
+      if (personalization.value.typePagination === 'Rolagem Infinita') {
+        state.paginationTypeSimple = false
+        state.paginationTypeInfinity = true
+      }
+    })
     function onBeforeEnter(el: any) {
       el.style.opacity = 0
     }
@@ -119,15 +120,12 @@ export default defineComponent({
     function loadMore() {
       setTimeout(() => {
         state.pageDisabled = false
+
         state.pageCount += 20
+
         const resetList = false
-        const number = 20
-        getDataBooks(
-          querySearch.value.toString(),
-          state.pageCount,
-          number,
-          resetList
-        )
+
+        getDataBooks(querySearch.value.toString(), state.pageCount, resetList)
         state.pageDisabled = true
       }, 1000)
     }
@@ -136,6 +134,7 @@ export default defineComponent({
       books,
       listOfBooks,
       totalBooks,
+      listOfBooksBaseInTypePage,
       state,
       loadMore,
       personalization,
