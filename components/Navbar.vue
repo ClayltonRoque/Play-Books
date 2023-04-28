@@ -124,7 +124,6 @@ export default defineComponent({
         typePagination: 'Paginação Simples',
       },
     })
-    console.log(personalizeSite)
     return {
       favoriteBooks,
       state,
