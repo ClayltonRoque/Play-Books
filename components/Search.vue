@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, useContext } from '@nuxtjs/composition-api'
+import { defineComponent, reactive } from '@nuxtjs/composition-api'
 
 import { useBookData } from '../service/bookData'
 
@@ -24,15 +24,11 @@ export default defineComponent({
   setup() {
     const { getDataBooks, querySearch } = useBookData()
 
-    const nuxtContext = useContext()
-
     const state = reactive({
       query: '',
     })
 
     async function submit() {
-      nuxtContext.redirect('/')
-
       const startIndex = 0
 
       const resetList = true
