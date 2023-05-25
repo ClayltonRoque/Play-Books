@@ -4,7 +4,9 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <Nuxt-link :to="{ name: 'books-id', params: { id: book.id } }">
+            <Nuxt-link
+              :to="{ name: 'books-id', params: { id: $props.book.id } }"
+            >
               <figure
                 v-if="imageThumbnail && imageThumbnail.length"
                 class="media"
@@ -20,85 +22,46 @@
           <div class="media-content">
             <div class="content">
               <p class="title title-card is-size-4 has-text-base-title">
-                {{ book.volumeInfo.title }}
+                {{ $props.book.volumeInfo.title }}
               </p>
               <div
-                v-if="book.volumeInfo.authors && book.volumeInfo.authors.length"
+                v-if="
+                  $props.book.volumeInfo.authors &&
+                  $props.book.volumeInfo.authors.length
+                "
               >
                 <p class="subtitle subtitle-card has-text-base-subtitle">
-                  {{ book.volumeInfo.authors[0] }}
+                  {{ $props.book.volumeInfo.authors[0] }}
                 </p>
               </div>
               <p v-else class="subtitle subtitle-card has-text-base-subtitle">
                 Author
               </p>
               <p
-                v-if="book.volumeInfo.description"
+                v-if="$props.book.volumeInfo.description"
                 ref="description"
                 key="description-card"
                 class="description description-card has-text-base-text is-size-6"
               >
-                {{ book.volumeInfo.description }}
+                {{ $props.book.volumeInfo.description }}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <ButtonSaveBook :book="book" />
+      <ButtonSaveBook :book="$props.book" />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  reactive,
-  ref,
-} from '@nuxtjs/composition-api'
-import gsap from 'gsap'
-
-import ButtonSaveBook from '~/components/ButtonSaveBook.vue'
+<script setup lang="ts">
+import { ref, useNuxtApp } from '#app'
 
 import { useVolume } from '@/service/volume'
 
-export default defineComponent({
-  name: 'PlayBookCard',
-  components: {
-    ButtonSaveBook,
-  },
-  props: {
-    book: {
-      type: Object as PropType<BookDocument.Volume>,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { imageThumbnail } = useVolume(props.book)
-    const description = ref<HTMLElement>()
-
-    const state = reactive({
-      seenLess: false,
-    })
-
-    function toggleSeenLess() {
-      state.seenLess = !state.seenLess
-      if (description.value) {
-        gsap.to(description.value, {
-          opacity: state.seenLess ? 0 : 1,
-          duration: 1,
-        })
-      }
-    }
-
-    return {
-      state,
-      description,
-      imageThumbnail,
-      toggleSeenLess,
-    }
-  },
-})
+const { $props } = useNuxtApp()
+const { imageThumbnail } = useVolume($props.book)
+const description = ref<HTMLElement>()
 </script>
 
 <style lang="scss">

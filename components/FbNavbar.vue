@@ -18,7 +18,7 @@
           <img src="@/assets/book-logo.png" />
         </Nuxt-link>
         <div class="content-search">
-          <Search />
+          <FbSearch />
         </div>
         <a
           class="navbar-burger"
@@ -99,36 +99,24 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from '@nuxtjs/composition-api'
+<script setup lang="ts">
+import { reactive } from '#app'
 import { useBookData } from '~/service/bookData'
-import Search from '../components/Search.vue'
+
 import { StateProps as StateBook } from '~/store/bookData'
 
 export interface StateProps {
   bookData: StateBook
 }
 
-export default defineComponent({
-  name: 'PlayBookNavBar',
-  components: { Search },
+const { favoriteBooks, personalizeSite } = useBookData()
 
-  setup() {
-    const { favoriteBooks, personalizeSite } = useBookData()
-
-    const state = reactive({
-      isModalActive: false,
-      isHamburgerActive: false,
-      personalizeSite: {
-        typeSearch: 'Titulo',
-        typePagination: 'Paginação Simples',
-      },
-    })
-    return {
-      favoriteBooks,
-      state,
-      personalizeSite,
-    }
+const state = reactive({
+  isModalActive: false,
+  isHamburgerActive: false,
+  personalizeSite: {
+    typeSearch: 'Titulo',
+    typePagination: 'Paginação Simples',
   },
 })
 </script>
