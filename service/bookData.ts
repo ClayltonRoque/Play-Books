@@ -1,9 +1,4 @@
-import {
-  computed,
-  useContext,
-  useStore,
-  reactive,
-} from '@nuxtjs/composition-api'
+import { computed, reactive, useNuxtApp } from '#app'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
@@ -13,9 +8,10 @@ export interface StateProps {
 const API_KEY = 'AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'
 
 export function useBookData() {
-  const nuxtContext = useContext()
+  const { $store, $axios } = useNuxtApp()
+  const axios = $axios
 
-  const store = useStore<StateProps>()
+  const store = $store
 
   const books = computed(() => {
     return store.state.bookData.books
@@ -58,7 +54,7 @@ export function useBookData() {
     store.commit('bookData/QUERY_SEARCH', query)
 
     try {
-      const data = await nuxtContext.$axios.$get('volumes', {
+      const data = await axios.$get('volumes', {
         params: {
           q: !query
             ? 'Livros Famosos'

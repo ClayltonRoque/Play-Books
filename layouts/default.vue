@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PlayBookNavBar />
+    <FbNavbar />
     <Nuxt />
     <b-loading
       :is-full-page="true"
@@ -10,30 +10,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, useStore, computed } from '@nuxtjs/composition-api'
-import PlayBookNavBar from '~/components/Navbar.vue'
+<script setup lang="ts">
+import { computed, useNuxtApp } from '#app'
 
-import { StateProps as SiteProps } from '@/store/siteData'
+const { $store } = useNuxtApp()
 
-type StoreProps = {
-  siteData: SiteProps
-}
+const store = $store
 
-export default defineComponent({
-  components: {
-    PlayBookNavBar,
-  },
-  setup() {
-    const store = useStore<StoreProps>()
-
-    const isLoading = computed(() => store.state.siteData.isLoadingActive)
-
-    return {
-      isLoading,
-    }
-  },
-})
+const isLoading = computed(() => store.state.siteData.isLoadingActive)
 </script>
 
 <style lang="scss"></style>

@@ -23,8 +23,11 @@
     "@nuxtjs/fontawesome": "^1.1.2",
     "core-js": "^3.25.3",
     "gsap": "^3.11.5",
+    "node-sass": "^9.0.0",
     "nuxt": "2.16.3",
     "nuxt-buefy": "^0.4.24",
+    "sass-loader": "^10.4.1",
+    "sass-resources-loader": "^2.2.5",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"

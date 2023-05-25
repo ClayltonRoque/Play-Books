@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from '@nuxtjs/composition-api'
+import { defineComponent, reactive } from '#app'
 
 import { useBookData } from '../service/bookData'
 

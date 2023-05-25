@@ -1,16 +1,16 @@
 <template>
   <div class="play-book-button-save mt-2">
     <button
-      v-if="!alreadyfavorite(book)"
+      v-if="!alreadyfavorite($props.book)"
       class="button is-align-content-center is-size-6"
-      @click="saveBooks(book)"
+      @click="saveBooks($props.book)"
     >
       Favoritar <fa class="pl-1" icon="fa-solid fa-heart-circle-plus" />
     </button>
     <button
       v-else
       class="button is-brand-red is-align-content-center is-size-6"
-      @click="removeBook(book)"
+      @click="removeBook($props.book)"
     >
       Remover
       <fa class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
@@ -18,29 +18,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-
+<script setup lang="ts">
+import { useNuxtApp } from '#app'
 import { useBookData } from '../service/bookData'
 
-export default defineComponent({
-  name: 'PlayBookButtonSaveBook',
-  props: {
-    book: {
-      type: Object as PropType<BookDocument.Volume>,
-      required: true,
-    },
-  },
-  setup() {
-    const { saveBooks, alreadyfavorite, removeBook } = useBookData()
-
-    return {
-      saveBooks,
-      removeBook,
-      alreadyfavorite,
-    }
-  },
-})
+const { saveBooks, alreadyfavorite, removeBook } = useBookData()
+const { $props } = useNuxtApp()
 </script>
 
 <style lang="scss">
