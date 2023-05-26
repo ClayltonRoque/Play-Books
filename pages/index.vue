@@ -1,6 +1,6 @@
 <template>
   <section class="play-books-home container" style="top: 86px">
-    <ListOfBooks v-if="totalBooks" />
+    <FbListOfBooks v-if="totalBooks" />
     <div v-else>
       <FbNoPageContent
         title="Você ainda não pesquisou livros"
