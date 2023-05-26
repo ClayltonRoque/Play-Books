@@ -23,7 +23,7 @@
         ></infinite-loading>
       </div>
       <div v-if="state.paginationTypeSimple">
-        <BooksPagination />
+        <FbBooksPagination />
       </div>
     </div>
   </section>

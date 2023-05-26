@@ -1,15 +1,17 @@
-import { computed, reactive, useNuxtApp } from '#app'
+import { computed, reactive, useNuxtApp, useLazyFetch } from '#app'
 
 import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
   bookData: StateBook
 }
-
-const API_KEY = 'AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'
+interface booksRequestApi {
+  items: []
+  kind: string
+  totalItems: number
+}
 
 export function useBookData() {
-  const { $store, $axios } = useNuxtApp()
-  const axios = $axios
+  const { $store } = useNuxtApp()
 
   const store = $store
 
@@ -52,36 +54,37 @@ export function useBookData() {
   ) {
     store.commit('bookData/SAVE_BOOKS', [])
     store.commit('bookData/QUERY_SEARCH', query)
-
-    try {
-      const data = await axios.$get('volumes', {
+    const { data, error } = await useLazyFetch<booksRequestApi>(
+      'https://www.googleapis.com/books/v1/volumes',
+      {
         params: {
           q: !query
             ? 'Livros Famosos'
             : store.state.bookData.personalizeSite.typeSearch + query,
-          key: API_KEY,
           maxResults,
           startIndex,
         },
-      })
-
-      if (!data.items) {
-        data.items = []
       }
+    )
+    if (!data.value.items) {
+      data.value.items = []
+    }
 
-      if (!startIndex) {
-        store.commit('bookData/TOTAL_BOOKS', data.totalItems)
-      }
-      if (resetList === false) {
-        store.commit('bookData/SAVE_BOOKS_IN_LIST', data.items)
-      } else {
-        store.commit('bookData/RESET_BOOKS_IN_LIST', [])
-      }
+    if (!startIndex) {
+      store.commit('bookData/TOTAL_BOOKS', data.value.totalItems)
+    }
+    if (resetList === false) {
+      store.commit('bookData/SAVE_BOOKS_IN_LIST', data.value.items)
+    } else {
+      store.commit('bookData/RESET_BOOKS_IN_LIST', [])
+    }
 
-      store.commit('bookData/SAVE_BOOKS', data.items)
-    } catch (error) {
+    store.commit('bookData/SAVE_BOOKS', data.value.items)
+
+    if (error) {
       console.log('Não foi possível buscar informações com o servidor')
     }
+    console.log(data.value)
   }
 
   function saveBooks(favoriteBook: BookDocument.Volume) {

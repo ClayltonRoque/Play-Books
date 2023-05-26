@@ -135,7 +135,7 @@
         </div>
       </div>
       <div>
-        <ButtonSaveBook
+        <FbButtonSaveBook
           class="is-align-content-center is-size-6"
           :book="props.details"
         />
@@ -145,17 +145,22 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from '#app'
+import { useNuxtApp, PropType } from '#app'
 import { useVolume } from '@/service/volume'
 
-const nuxtContext = useNuxtApp()
-const props = nuxtContext.$props
+const {nuxt2Context} = useNuxtApp()
+const props = defineProps({
+  details: {
+    type: Object as PropType<BookDocument.Volume>,
+    required: true,
+  },
+})
 
 const { imageThumbnail } = useVolume(props.details)
 
 function goToPrev() {
-  const fromPath = nuxtContext.from.value?.fullPath
-  nuxtContext.redirect(fromPath || '/')
+  const fromPath = nuxt2Context.from?.fullPath
+  nuxt2Context.redirect(fromPath || '/')
 }
 </script>
 

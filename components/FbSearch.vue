@@ -8,42 +8,29 @@
           type="text"
           placeholder="Pesquisar livros"
         />
-        <fa class="test" icon="fa-solid fa-magnifying-glass" />
+        <font-awesome-icon class="test" icon="fa-solid fa-magnifying-glass" />
       </div>
     </form>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from '#app'
+<script setup lang="ts">
+import { reactive } from '#app'
 
 import { useBookData } from '../service/bookData'
 
-export default defineComponent({
-  name: 'PlayBookSearch',
-  setup() {
-    const { getDataBooks, querySearch } = useBookData()
+const { getDataBooks } = useBookData()
 
-    const state = reactive({
-      query: '',
-    })
-
-    async function submit() {
-      const startIndex = 0
-
-      const resetList = true
-
-      await getDataBooks(state.query, startIndex, resetList)
-    }
-
-    return {
-      state,
-      querySearch,
-      getDataBooks,
-      submit,
-    }
-  },
+const state = reactive({
+  query: '',
 })
+
+async function submit() {
+  const startIndex = 0
+  const resetList = true
+
+  await getDataBooks(state.query, startIndex, resetList)
+}
 </script>
 
 <style lang="scss">

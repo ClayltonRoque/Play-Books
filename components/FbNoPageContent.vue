@@ -6,7 +6,7 @@
           <img src="~/assets/no-search.png" />
         </figure>
         <p
-          v-if="notfound === 'true'"
+          v-if="props.notfound === 'true'"
           class="title is-size-5 has-text-base-title pb-2"
         >
           <button
@@ -17,7 +17,7 @@
           </button>
         </p>
         <p v-else class="title is-size-5 has-text-base-title pb-2">
-          {{ title }}
+          {{ props.title }}
         </p>
         <p class="subtitle has-text-base-subtitle">
           Pesquise e navegue pela lista de livros do Google Play Books
@@ -27,33 +27,23 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
+<script setup lang="ts">
+import { useNuxtApp } from '#app'
 
-export default defineComponent({
-  name: 'PlayBooksNoPage',
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    notfound: {
-      type: String,
-      required: true,
-    },
+const nuxtContext = useNuxtApp()
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  setup() {
-    const nuxtContext = useContext()
-
-    function goToHome() {
-      nuxtContext.redirect('/')
-    }
-
-    return {
-      goToHome,
-    }
+  notfound: {
+    type: String,
+    required: true,
   },
 })
+function goToHome() {
+  nuxtContext.redirect('/')
+}
 </script>
 
 <style lang="scss">

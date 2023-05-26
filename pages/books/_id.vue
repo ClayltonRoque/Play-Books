@@ -2,15 +2,21 @@
   <section class="play-books-details container">
     <div v-if="details" class="books-details-container px-5">
       <div v-if="details">
-        <FbDetailsCard :details="details" />
+        <FbDeitailsCard :details="details" />
       </div>
       <div class="details-content">
-        <p class="title is-size-5 has-text-base-title pb-2"></p>
-        <div class="subtitle has-text-base-subtitle"></div>
+        <p
+          class="title is-size-5 has-text-base-title pb-2"
+          v-html="details?.volumeInfo.title"
+        ></p>
+        <div
+          class="subtitle has-text-base-subtitle"
+          v-html="details?.volumeInfo.description"
+        ></div>
       </div>
     </div>
     <div v-else>
-      <NoPageContent
+      <FbNoPageContent
         title="Página não encontrada, voltar para home!"
         notfound="true"
       />
@@ -20,21 +26,21 @@
 
 <script setup lang="ts">
 import { ref, useLazyFetch, useRoute, useNuxtApp } from '#app'
-const { $axios } = useNuxtApp()
+
 const route = useRoute()
+const { $store } = useNuxtApp()
 const params = route.params
 const details = ref()
-const { data } = $axios.get(`volumes/${params.id}`)
-console.log(data)
 
-useLazyFetch('https://www.googleapis.com/books/v1/volumes/rezero', {
-  onResponse({ response }) {
-    details.value = response._data
-  },
-  onResponseError({ response }) {
-    console.log(response._data)
-  },
-})
+const { data, pending } = useLazyFetch<BookDocument.Volume>(
+  `https://www.googleapis.com/books/v1/volumes/${params.id}`
+)
+
+if (pending) {
+  $store.dispatch('siteData/block')
+  details.value = data
+  $store.dispatch('siteData/unBlock')
+}
 </script>
 
 <style lang="scss">
