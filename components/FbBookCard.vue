@@ -5,7 +5,7 @@
         <div class="media">
           <div class="media-left">
             <Nuxt-link
-              :to="{ name: 'books-id', params: { id: $props.book.id } }"
+              :to="{ name: 'books-id', params: { id: props.book.id } }"
             >
               <figure
                 v-if="imageThumbnail && imageThumbnail.length"
@@ -22,16 +22,16 @@
           <div class="media-content">
             <div class="content">
               <p class="title title-card is-size-4 has-text-base-title">
-                {{ $props.book.volumeInfo.title }}
+                {{ props.book.volumeInfo.title }}
               </p>
               <div
                 v-if="
-                  $props.book.volumeInfo.authors &&
-                  $props.book.volumeInfo.authors.length
+                  props.book.volumeInfo.authors &&
+                  props.book.volumeInfo.authors.length
                 "
               >
                 <p class="subtitle subtitle-card has-text-base-subtitle">
-                  {{ $props.book.volumeInfo.authors[0] }}
+                  {{ props.book.volumeInfo.authors[0] }}
                 </p>
               </div>
               <p v-else class="subtitle subtitle-card has-text-base-subtitle">
@@ -43,24 +43,30 @@
                 key="description-card"
                 class="description description-card has-text-base-text is-size-6"
               >
-                {{ $props.book.volumeInfo.description }}
+                {{ props.book.volumeInfo.description }}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <ButtonSaveBook :book="$props.book" />
+      <FbButtonSaveBook :book="props.book" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, useNuxtApp } from '#app'
+import { ref, PropType } from '#app'
 
 import { useVolume } from '@/service/volume'
 
-const { $props } = useNuxtApp()
-const { imageThumbnail } = useVolume($props.book)
+const props = defineProps({
+  book: {
+    type: Object as PropType<BookDocument.Volume>,
+    required: true,
+  },
+})
+
+const { imageThumbnail } = useVolume(props.book)
 const description = ref<HTMLElement>()
 </script>
 

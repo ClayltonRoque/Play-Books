@@ -1,16 +1,17 @@
 <template>
   <div class="play-book-button-save mt-2">
     <button
-      v-if="!alreadyfavorite($props.book)"
+      v-if="!alreadyfavorite(props.book)"
       class="button is-align-content-center is-size-6"
-      @click="saveBooks($props.book)"
+      @click="saveBooks(props.book)"
     >
-      Favoritar <fa class="pl-1" icon="fa-solid fa-heart-circle-plus" />
+      Favoritar
+      <b-field icon-pack="icomoon" icon-right="playBookheart"></b-field>
     </button>
     <button
       v-else
       class="button is-brand-red is-align-content-center is-size-6"
-      @click="removeBook($props.book)"
+      @click="removeBook(props.book)"
     >
       Remover
       <fa class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
@@ -19,11 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from '#app'
+import { PropType } from '#app'
 import { useBookData } from '../service/bookData'
 
 const { saveBooks, alreadyfavorite, removeBook } = useBookData()
-const { $props } = useNuxtApp()
+const props = defineProps({
+  book: {
+    type: Object as PropType<BookDocument.Volume>,
+    required: true,
+  },
+})
 </script>
 
 <style lang="scss">

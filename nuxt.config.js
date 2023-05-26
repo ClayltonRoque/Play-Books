@@ -17,29 +17,26 @@ export default defineNuxtConfig({
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/styles/app.scss'],
 
   buefy: {
     css: false,
   },
 
-  fontawesome: {
-    component: 'Fa',
-    suffix: false,
-    icons: {
-      solid: true,
-      brands: true,
-    },
-  },
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/vuex-persistedstate.js',
+      mode: 'client',
+    },
+    { src: '~plugins/vue-infinite-loading.js', ssr: false },
+    { src: '~/plugins/font-awesome.js' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/fontawesome'],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -71,4 +68,9 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    '~/assets/styles/app.scss',
+  ],
 })
