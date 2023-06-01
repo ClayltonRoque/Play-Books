@@ -54,10 +54,6 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    scripts: {
-      build: 'nuxi build',
-      start: 'nuxi preview',
-    },
     loaders: {
       scss: {
         additionalData: `

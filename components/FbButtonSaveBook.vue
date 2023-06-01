@@ -6,7 +6,7 @@
       @click="saveBooks(props.book)"
     >
       Favoritar
-      <b-field icon-pack="icomoon" icon-right="playBookheart"></b-field>
+      <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-plus" />
     </button>
     <button
       v-else
@@ -14,7 +14,7 @@
       @click="removeBook(props.book)"
     >
       Remover
-      <fa class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
+      <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
     </button>
   </div>
 </template>
