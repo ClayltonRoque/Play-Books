@@ -92,5 +92,5 @@ sw.*
 # Vim swap files
 *.swp
 
-yarn.lock
+# Build result
 .output
