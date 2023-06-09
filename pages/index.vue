@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <button @click="count">{{ test }}</button>
+    <button @click="count">{{ counter }}</button>
   </div>
   <!-- <section class="play-books-home container" style="top: 86px">
     <FbListOfBooks v-if="totalBooks" />
@@ -14,11 +14,15 @@
 </template>
 
 <script setup lang="ts">
-const test = ref(0)
+import { storeToRefs } from 'pinia'
 
-function count() {
-  test.value++
-}
+import { userCounter } from '~/store/counter'
+
+const useCounterStore = userCounter()
+const { count } = useCounterStore
+
+const { counter } = storeToRefs(useCounterStore)
+
 // import { useBookData } from '~/service/bookData'
 
 // const { totalBooks } = useBookData()

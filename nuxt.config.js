@@ -1,4 +1,8 @@
 export default defineNuxtConfig({
+  modules: [
+    // https://pinia.vuejs.org/ssr/nuxt.html
+    '@pinia/nuxt',
+  ],
   vite: {
     css: {
       preprocessorOptions: {
