@@ -1,5 +1,5 @@
 <template>
-  <section class="play-books-home container" style="top: 86px">
+  <!-- <section class="play-books-home container" style="top: 86px">
     <div
       v-if="favoriteBooks.length"
       class="columns is-multiline align-items-full py-5"
@@ -17,7 +17,7 @@
         notfound="false"
       />
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script setup lang="ts">

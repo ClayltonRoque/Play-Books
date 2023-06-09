@@ -100,7 +100,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from '#app'
 import { useBookData } from '~/service/bookData'
 
 import { StateProps as StateBook } from '~/store/bookData'
@@ -108,7 +107,7 @@ import { StateProps as StateBook } from '~/store/bookData'
 export interface StateProps {
   bookData: StateBook
 }
-
+const a = ref()
 const { favoriteBooks, personalizeSite } = useBookData()
 
 const state = reactive({
