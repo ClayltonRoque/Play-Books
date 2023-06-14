@@ -20,16 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from '#app'
-import { useBookData } from '../service/bookData'
-
-const { saveBooks, alreadyfavorite, removeBook } = useBookData()
 const props = defineProps({
   book: {
     type: Object as PropType<BookDocument.Volume>,
     required: true,
   },
 })
+
+function saveBooks() {}
+function alreadyfavorite() {}
+function removeBook() {}
 </script>
 
 <style lang="scss">

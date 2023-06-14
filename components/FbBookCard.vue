@@ -4,9 +4,7 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <Nuxt-link
-              :to="{ name: 'books-id', params: { id: props.book.id } }"
-            >
+            <div :to="{ name: 'books-id', params: { id: props.book.id } }">
               <figure
                 v-if="imageThumbnail && imageThumbnail.length"
                 class="media"
@@ -17,7 +15,7 @@
               <figure v-else>
                 <img src="@/assets/no-image.png" />
               </figure>
-            </Nuxt-link>
+            </div>
           </div>
           <div class="media-content">
             <div class="content">
@@ -55,8 +53,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from '#app'
-
 import { useVolume } from '@/service/volume'
 
 const props = defineProps({

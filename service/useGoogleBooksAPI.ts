@@ -1,18 +1,34 @@
-import Requests from '@/service/Requests'
+import { AsyncData } from 'nuxt/app'
+
+interface BooksRequestApi {
+  items: BookDocument.Volume[]
+  kind: string
+  totalItems: number
+}
 
 export function useGoogleBooksAPI() {
-  const api = new Requests('https://www.googleapis.com/books/v1', {
-    Accept: 'application/json',
-  })
+  async function $api(url: string, options: any) {
+    return useFetch(url, {
+      baseURL: 'https://www.googleapis.com/books/v1',
+      headers: {
+        accept: 'application/json',
+      },
+      ...options,
+    })
+  }
 
-  function fetchBooks(term: string, maxResults: number, startIndex: number) {
-    return api.get('volumes', {
+  async function fetchBooks(
+    term: string,
+    maxResults: number,
+    startIndex: number
+  ) {
+    return $api('volumes', {
       params: {
         q: term,
-        maxResults,
-        startIndex,
+        maxResults: maxResults,
+        startIndex: startIndex,
       },
-    })
+    }) as AsyncData<BooksRequestApi, any>
   }
 
   return {

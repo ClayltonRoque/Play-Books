@@ -1,5 +1,3 @@
-import { computed } from '#app'
-
 export function useVolume(volume: BookDocument.Volume) {
   const imageThumbnail = computed(
     () =>

@@ -1,17 +1,18 @@
 <template>
   <section class="play-books-home container">
-    <div>hello world</div>
-    <button @click="bookStore.fetchBooks">Click in me</button>
-    <ul v-for="(book, index) in bookStore.list" :key="index">
-      <li>{{ book }}</li>
-    </ul>
-    <!-- <FbListOfBooks v-if="totalBooks" />
+    <div v-if="bookStore.list.length">
+      <ul v-for="(book, index) in bookStore.list">
+        <li :key="index">
+          <FbBookCard :book="book" />
+        </li>
+      </ul>
+    </div>
     <div v-else>
       <FbNoPageContent
         title="Você ainda não pesquisou livros"
         notfound="false"
       />
-    </div> -->
+    </div>
   </section>
 </template>
 
@@ -19,6 +20,9 @@
 import { useBookStore } from '@/store/book'
 
 const bookStore = useBookStore()
+
+// Buscando livros do Google Book API
+bookStore.fetchBooks()
 </script>
 
 <style lang="scss">

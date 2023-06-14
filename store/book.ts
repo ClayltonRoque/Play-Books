@@ -1,25 +1,14 @@
 import { defineStore } from 'pinia'
-import range from 'lodash/range'
-
-interface Book {
-  id: number
-  title: string
-  description: string
-}
+import { useGoogleBooksAPI } from '~/service/useGoogleBooksAPI'
 
 export const useBookStore = defineStore('book', () => {
-  const list = ref<Book[]>([])
+  const list = ref<BookDocument.Volume[]>([])
 
-  function fetchBooks() {
-    const book: Book = {
-      id: 1,
-      title: 'Non sit in deserunt eiusmod sint.',
-      description:
-        'Adipisicing duis ullamco sunt reprehenderit qui fugiat magna esse magna sint elit elit cupidatat aliqua.',
-    }
-    range(3).forEach(() => {
-      list.value.push(book)
-    })
+  async function fetchBooks() {
+    const { fetchBooks } = useGoogleBooksAPI()
+    const { data } = await fetchBooks('java', 20, 0)
+
+    list.value = data.value.items
   }
 
   return {
