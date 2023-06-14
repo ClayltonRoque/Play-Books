@@ -4,11 +4,11 @@
     role="navigation"
     aria-label="main navigation"
   >
-    <div
+    <!-- <div
       class="backdrop"
       :class="{ 'is-active': state.isHamburgerActive }"
       @click="state.isHamburgerActive = !state.isHamburgerActive"
-    ></div>
+    ></div> -->
     <div class="container">
       <div class="navbar-brand is-align-items-center">
         <Nuxt-link to="/" class="navbar-item logo-item">
@@ -20,7 +20,7 @@
         <div class="content-search">
           <FbSearch />
         </div>
-        <a
+        <!-- <a
           class="navbar-burger"
           :class="{ 'is-active': state.isHamburgerActive }"
           @click="state.isHamburgerActive = !state.isHamburgerActive"
@@ -28,10 +28,10 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </a> -->
       </div>
 
-      <div
+      <!-- <div
         :class="{ 'is-active': state.isHamburgerActive }"
         class="navbar-menu"
       >
@@ -94,30 +94,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { useBookData } from '~/service/bookData'
-
-import { StateProps as StateBook } from '~/store/bookData'
-
-export interface StateProps {
-  bookData: StateBook
-}
-const a = ref()
-const { favoriteBooks, personalizeSite } = useBookData()
-
-const state = reactive({
-  isModalActive: false,
-  isHamburgerActive: false,
-  personalizeSite: {
-    typeSearch: 'Titulo',
-    typePagination: 'Paginação Simples',
-  },
-})
 </script>
 
 <style lang="scss">

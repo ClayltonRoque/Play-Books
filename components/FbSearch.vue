@@ -15,21 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from '#app'
-
-import { useBookData } from '../service/bookData'
-
-const { getDataBooks } = useBookData()
 
 const state = reactive({
   query: '',
 })
 
 async function submit() {
-  const startIndex = 0
-  const resetList = true
-
-  await getDataBooks(state.query, startIndex, resetList)
+  alert('query enviada')
 }
 </script>
 

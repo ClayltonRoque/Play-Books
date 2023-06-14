@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="has-text-primary">functional</p>
+    <FbNavbar />
     <slot />
   </div>
 </template>
