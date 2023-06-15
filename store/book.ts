@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
 import { useGoogleBooksAPI } from '~/service/useGoogleBooksAPI'
 
 export const useBookStore = defineStore('book', () => {
@@ -12,7 +12,7 @@ export const useBookStore = defineStore('book', () => {
   }
 
   return {
-    list,
+    list: skipHydrate(list),
     fetchBooks,
   }
 })

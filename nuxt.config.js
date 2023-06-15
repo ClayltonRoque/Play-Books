@@ -12,5 +12,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ['bulma', '~/assets/styles/app.scss'],
+  css: ['~/assets/styles/app.scss'],
 })
