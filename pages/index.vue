@@ -1,5 +1,15 @@
 <template>
   <section class="play-books-home container">
+    <button
+      @click="
+        personalizeSiteService.personalizationValuesSet({
+          typeSearch: 'Autor',
+          typePagination: 'Rolagem Infinita',
+        })
+      "
+    >
+      {{ personalizeSiteService.personalizationValues }}
+    </button>
     <div v-if="bookStore.list.length">
       <ul v-for="(book, index) in bookStore.list">
         <li :key="index">
@@ -18,8 +28,10 @@
 
 <script setup lang="ts">
 import { useBookStore } from '@/store/book'
+import { usePersonalizeSiteService } from '@/service/personalize-site'
 
 const bookStore = useBookStore()
+const personalizeSiteService = usePersonalizeSiteService()
 
 // Buscando livros do Google Book API
 bookStore.fetchBooks()
