@@ -32,9 +32,6 @@ import { usePersonalizeSiteService } from '@/service/personalize-site'
 
 const bookStore = useBookStore()
 const personalizeSiteService = usePersonalizeSiteService()
-
-// Buscando livros do Google Book API
-bookStore.fetchBooks()
 </script>
 
 <style lang="scss">

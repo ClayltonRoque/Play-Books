@@ -15,13 +15,15 @@
 </template>
 
 <script setup lang="ts">
-
+import { useBookStore } from '@/store/book'
 const state = reactive({
   query: '',
 })
 
+const bookStore = useBookStore()
+
 async function submit() {
-  alert('query enviada')
+  bookStore.fetchBooks(state.query)
 }
 </script>
 
