@@ -25,21 +25,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useLazyFetch, useRoute, useNuxtApp } from '#app'
-
 const route = useRoute()
-const { $store } = useNuxtApp()
-const params = route.params
-const details = ref()
 
-const { data, pending } = useLazyFetch<BookDocument.Volume>(
+const params = route.params
+
+const details = ref<BookDocument.Volume | null>()
+
+const { data, pending } = await useLazyFetch<BookDocument.Volume>(
   `https://www.googleapis.com/books/v1/volumes/${params.id}`
 )
 
 if (pending) {
-  $store.dispatch('siteData/block')
-  details.value = data
-  $store.dispatch('siteData/unBlock')
+  details.value = data.value
 }
 </script>
 
