@@ -1,22 +1,37 @@
 <template>
-  <section class="play-books-home container" style="top: 86px">
-    <div class="columns is-multiline align-items-full py-5">
-      <div class="columns is-multiline align-items-full py-5">
-        <FbBookCard
-          v-for="(book, index) in bookStore.list"
-          :key="index"
-          :book="book"
-          class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
-        />
+  <div class="fb-list-of-book">
+    <div class="fb-list-of-book-wrapper" ref="scroller">
+      <div class="container">
+        <div class="columns is-multiline align-items-full py-5">
+          <div class="columns is-multiline align-items-full py-5">
+            <FbBookCard
+              v-for="(book, index) in bookStore.list"
+              :key="index"
+              :book="book"
+              class="play-book-card column is-4-desktop is-12-tablet is-justify-content-center is-3"
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useBookStore } from '@/store/book'
 
+import { ref } from 'vue'
+import { useInfiniteScroll } from '@vueuse/core'
+
+const scroller = ref<HTMLElement | null>(null)
+
 const bookStore = useBookStore()
+
+useInfiniteScroll(scroller, onLoadMore, { distance: 10 })
+
+function onLoadMore() {
+  console.log('oi')
+}
 
 // const state = reactive({
 //   pageCount: 0,
@@ -70,11 +85,12 @@ const bookStore = useBookStore()
 </script>
 
 <style lang="scss">
-.play-books-home {
-  top: 86px;
-  .play-book-card {
-    display: flex;
-    cursor: pointer;
+.fb-list-of-book {
+  &-wrapper {
+    width: 100%;
+    height: calc(100vh - #{$navbar-height});
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 </style>

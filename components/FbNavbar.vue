@@ -30,19 +30,21 @@
           <span aria-hidden="true"></span>
         </a> -->
       </div>
+      <!-- <div class="navbar-start">
+        <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
+
+        <Nuxt-link to="/favorites" class="navbar-item"
+          >Favoritos<span class="favorites-notification">{{
+            favoriteBooks.length
+          }}</span></Nuxt-link
+        >
+      </div> -->
 
       <!-- <div
         :class="{ 'is-active': state.isHamburgerActive }"
         class="navbar-menu"
       >
-        <div class="navbar-start">
-          <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
-
-          <Nuxt-link to="/favorites" class="navbar-item"
-            >Favoritos<span class="favorites-notification">{{
-              favoriteBooks.length
-            }}</span></Nuxt-link
-          >
+     
 
           <a class="navbar-item" @click="state.isModalActive = true">Menu</a>
 
@@ -99,8 +101,7 @@
   </nav>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss">
 .play-book-navbar {

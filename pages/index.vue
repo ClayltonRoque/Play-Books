@@ -1,5 +1,5 @@
 <template>
-  <section class="play-books-home container" style="top: 86px">
+  <section class="play-books-home">
     <FbListOfBooks v-if="bookStore.list.length" />
     <div v-else>
       <FbNoPageContent
@@ -18,7 +18,6 @@ const bookStore = useBookStore()
 
 <style lang="scss">
 .play-books-home {
-  top: 86px;
   .play-book-card {
     display: flex;
     cursor: pointer;
