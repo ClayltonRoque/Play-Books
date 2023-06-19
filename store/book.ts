@@ -14,6 +14,7 @@ export const useBookStore = defineStore('book', () => {
     maxResults: 20,
     startIndex: 0,
   })
+  const totalBooks = ref(0)
 
   async function fetchBooks(payload: Params['query']) {
     const paramsRef = params.value
@@ -28,11 +29,13 @@ export const useBookStore = defineStore('book', () => {
     )
 
     list.value = data.value.items
+    totalBooks.value = data.value.totalItems
   }
 
   return {
     list: skipHydrate(list),
     params: skipHydrate(params),
+    totalBooks: skipHydrate(totalBooks),
     fetchBooks,
   }
 })

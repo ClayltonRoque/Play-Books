@@ -20,15 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from '#app'
+import { useBookStore } from '@/store/book'
 
-import { useBookData } from '~/service/bookData'
-
-const { totalBooks, getDataBooks, querySearch } = useBookData()
+const bookStore = useBookStore()
 
 const state = reactive({
   page: 1,
-  total: totalBooks,
+  total: bookStore.totalBooks,
   perPage: 20,
   rangeBefore: 3,
   rangeAfter: 3,
@@ -39,13 +37,13 @@ watch(
   () => state.page,
   (nextCurrentPage) => {
     let startIndex = 0
-    const query = querySearch.value.toString()
+    const query = bookStore.params.query.toString()
 
     if (nextCurrentPage > 1) {
       startIndex = (nextCurrentPage - 1) * state.page
     }
-
-    getDataBooks(query, startIndex)
+    bookStore.params.startIndex = startIndex
+    bookStore.fetchBooks(query)
   }
 )
 </script>
