@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import { useBookData } from '~/service/bookData'
+import { favoriteBookService } from '@/service/favorite'
 
-const { favoriteBooks } = useBookData()
+const { favoriteBooks } = favoriteBookService()
 </script>
 
 <style lang="scss"></style>

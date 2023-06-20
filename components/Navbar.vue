@@ -4,11 +4,11 @@
     role="navigation"
     aria-label="main navigation"
   >
-    <!-- <div
+    <div
       class="backdrop"
       :class="{ 'is-active': state.isHamburgerActive }"
       @click="state.isHamburgerActive = !state.isHamburgerActive"
-    ></div> -->
+    ></div>
     <div class="container">
       <div class="navbar-brand is-align-items-center">
         <Nuxt-link to="/" class="navbar-item logo-item">
@@ -20,7 +20,7 @@
         <div class="content-search">
           <Search />
         </div>
-        <!-- <a
+        <a
           class="navbar-burger"
           :class="{ 'is-active': state.isHamburgerActive }"
           @click="state.isHamburgerActive = !state.isHamburgerActive"
@@ -28,27 +28,26 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a> -->
+        </a>
       </div>
-      <!-- <div class="navbar-start">
-        <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
 
-        <Nuxt-link to="/favorites" class="navbar-item"
-          >Favoritos<span class="favorites-notification">{{
-            favoriteBooks.length
-          }}</span></Nuxt-link
-        >
-      </div> -->
-
-      <!-- <div
+      <div
         :class="{ 'is-active': state.isHamburgerActive }"
         class="navbar-menu"
       >
-     
+        <div class="navbar-start">
+          <Nuxt-link to="/" class="navbar-item">Home </Nuxt-link>
 
-          <a class="navbar-item" @click="state.isModalActive = true">Menu</a>
+          <Nuxt-link to="/favorites" class="navbar-item"
+            >Favoritos<span class="favorites-notification">{{
+              favoriteBooks.length
+            }}</span></Nuxt-link
+          >
+        </div>
 
-          <div :class="{ 'is-active': state.isModalActive }" class="modal">
+        <!-- <a class="navbar-item" @click="state.isModalActive = true">Menu</a> -->
+
+        <!-- <div :class="{ 'is-active': state.isModalActive }" class="modal">
             <div
               class="modal-background"
               @click="state.isModalActive = false"
@@ -94,14 +93,21 @@
                 </button>
               </footer>
             </div>
-          </div>
-        </div>
-      </div> -->
+          </div> -->
+      </div>
     </div>
   </nav>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { favoriteBookService } from '@/service/favorite'
+
+const state = reactive({
+  isHamburgerActive: false,
+})
+
+const { favoriteBooks } = favoriteBookService()
+</script>
 
 <style lang="scss">
 .play-books-navbar {

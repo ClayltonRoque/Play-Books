@@ -20,16 +20,14 @@
 </template>
 
 <script setup lang="ts">
+import { favoriteBookService } from '@/service/favorite'
 const props = defineProps({
   book: {
     type: Object as PropType<BookDocument.Volume>,
     required: true,
   },
 })
-
-function saveBooks() {}
-function alreadyfavorite() {}
-function removeBook() {}
+const { saveBooks, removeBook, alreadyfavorite } = favoriteBookService()
 </script>
 
 <style lang="scss">
