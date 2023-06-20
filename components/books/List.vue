@@ -1,10 +1,10 @@
 <template>
-  <div class="fb-list-of-book">
+  <div class="play-books-list">
     <div class="fb-list-of-book-wrapper" ref="scroller">
       <div class="container">
         <div class="columns is-multiline align-items-full py-5">
           <div class="columns is-multiline align-items-full py-5">
-            <FbBookCard
+            <BooksCard
               v-for="(book, index) in bookStore.list"
               :key="index"
               :book="book"
@@ -85,7 +85,7 @@ function onLoadMore() {
 </script>
 
 <style lang="scss">
-.fb-list-of-book {
+.play-book-list {
   &-wrapper {
     width: 100%;
     height: calc(100vh - #{$navbar-height});

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="play-book-navbar navbar is-fixed-top has-shadow is-base-post"
+    class="play-books-navbar navbar is-fixed-top has-shadow is-base-post"
     role="navigation"
     aria-label="main navigation"
   >
@@ -12,13 +12,13 @@
     <div class="container">
       <div class="navbar-brand is-align-items-center">
         <Nuxt-link to="/" class="navbar-item logo-item">
-          <img src="@/assets/play-books-logo.png" />
+          <img src="@/assets/img/play-books-logo.png" />
         </Nuxt-link>
         <Nuxt-link to="/" class="navbar-item logo-book">
-          <img src="@/assets/book-logo.png" />
+          <img src="@/assets/img/book-logo.png" />
         </Nuxt-link>
         <div class="content-search">
-          <FbSearch />
+          <Search />
         </div>
         <!-- <a
           class="navbar-burger"
@@ -104,7 +104,7 @@
 <script setup lang="ts"></script>
 
 <style lang="scss">
-.play-book-navbar {
+.play-books-navbar {
   position: initial;
   display: flex;
   align-items: center;

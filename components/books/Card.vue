@@ -1,5 +1,5 @@
 <template>
-  <div class="play-book-bookcard">
+  <div class="play-books-card">
     <div class="card is-desktop">
       <div class="card-content">
         <div class="media">
@@ -13,7 +13,7 @@
                 <img :src="imageThumbnail" />
               </figure>
               <figure v-else>
-                <img src="@/assets/no-image.png" />
+                <img src="@/assets/img/no-image.png" />
               </figure>
             </div>
           </div>
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <FbButtonSaveBook :book="props.book" />
+      <BooksBtnFavoriteSave :book="props.book" />
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ const description = ref<HTMLElement>()
 </script>
 
 <style lang="scss">
-.play-book-bookcard {
+.play-books-card {
   img {
     background-repeat: no-repeat;
     background-position: center;

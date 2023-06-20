@@ -3,7 +3,7 @@
     <div class="no-page-content">
       <div class="no-page">
         <figure>
-          <img src="~/assets/no-search.png" />
+          <img src="~/assets/img/no-search.png" />
         </figure>
         <p
           v-if="props.notfound === 'true'"
@@ -11,7 +11,6 @@
         >
           <button
             class="button is-ghost has-text-brand-blue button-details is-size-6 is-uppercase"
-            @click="goToHome"
           >
             Página não encontrada, voltar para home!
           </button>
@@ -28,9 +27,6 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from '#app'
-
-const nuxtContext = useNuxtApp()
 const props = defineProps({
   title: {
     type: String,
@@ -41,9 +37,9 @@ const props = defineProps({
     required: true,
   },
 })
-function goToHome() {
-  nuxtContext.redirect('/')
-}
+// function goToHome() {
+//   nuxtContext.redirect('/')
+// }
 </script>
 
 <style lang="scss">

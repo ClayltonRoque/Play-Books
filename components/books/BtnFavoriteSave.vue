@@ -1,12 +1,12 @@
 <template>
-  <div class="play-book-button-save mt-2">
+  <div class="play-books-btn-favorite-save mt-2">
     <button
       v-if="!alreadyfavorite(props.book)"
       class="button is-align-content-center is-size-6"
       @click="saveBooks(props.book)"
     >
       Favoritar
-      <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-plus" />
+      <!-- <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-plus" /> -->
     </button>
     <button
       v-else
@@ -14,7 +14,7 @@
       @click="removeBook(props.book)"
     >
       Remover
-      <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-xmark" />
+      <!-- <font-awesome-icon class="pl-1" icon="fa-solid fa-heart-circle-xmark" /> -->
     </button>
   </div>
 </template>
@@ -33,7 +33,7 @@ function removeBook() {}
 </script>
 
 <style lang="scss">
-.play-book-button-save {
+.play-books-btn-favorite-save {
   position: absolute;
   bottom: 1rem;
   right: 0.5rem;

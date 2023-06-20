@@ -1,22 +1,22 @@
 <template>
   <section class="play-books-details container">
-    <div v-if="details" class="books-details-container px-5">
-      <div v-if="details">
-        <FbDeitailsCard :details="details" />
+    <div class="books-details-container px-5">
+      <div v-if="state.book">
+        <BooksCard :book="state.book" />
       </div>
       <div class="details-content">
         <p
           class="title is-size-5 has-text-base-title pb-2"
-          v-html="details?.volumeInfo.title"
+          v-html="state.book?.volumeInfo.title"
         ></p>
         <div
           class="subtitle has-text-base-subtitle"
-          v-html="details?.volumeInfo.description"
+          v-html="state.book?.volumeInfo.description"
         ></div>
       </div>
     </div>
-    <div v-else>
-      <FbNoPageContent
+    <div>
+      <NoPageContent
         title="Página não encontrada, voltar para home!"
         notfound="true"
       />
@@ -25,19 +25,22 @@
 </template>
 
 <script setup lang="ts">
+interface StateProps {
+  book: BookDocument.Volume | null
+}
 const route = useRoute()
 
 const params = route.params
 
-const details = ref<BookDocument.Volume | null>()
+const state = reactive<StateProps>({
+  book: null,
+})
 
-const { data, pending } = await useLazyFetch<BookDocument.Volume>(
+const { data } = useLazyFetch<BookDocument.Volume>(
   `https://www.googleapis.com/books/v1/volumes/${params.id}`
 )
 
-if (pending) {
-  details.value = data.value
-}
+state.book = data.value
 </script>
 
 <style lang="scss">

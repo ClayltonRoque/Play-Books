@@ -1,5 +1,5 @@
 <template>
-  <div class="play-books-details-card card is-desktop has-base-profile">
+  <div class="play-books-details card is-desktop has-base-profile">
     <div class="card-content">
       <header class="card-header pb-2">
         <button
@@ -27,7 +27,7 @@
             <img :src="imageThumbnail" />
           </figure>
           <figure v-else>
-            <img src="@/assets/no-image.png" />
+            <img src="@/assets/img/no-image.png" />
           </figure>
         </div>
         <div class="media-content">
@@ -166,7 +166,7 @@ function goToPrev() {
 </script>
 
 <style lang="scss">
-.play-books-details-card {
+.play-books-details {
   border: 1px solid #112131;
   &:hover {
     border-color: $brand-blue;

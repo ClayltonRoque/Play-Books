@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <FbNavbar />
+  <div class="play-book-layout">
+    <Navbar />
     <div class="page-container">
       <slot />
     </div>
@@ -8,7 +8,9 @@
 </template>
 
 <style lang="scss">
-.page-container {
-  margin-top: $navbar-height;
+.play-book-layout {
+  .page-container {
+    margin-top: $navbar-height;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="play-book-search">
+  <div class="play-books-search">
     <form @submit.prevent="submit">
       <div class="search">
         <input
@@ -8,7 +8,7 @@
           type="text"
           placeholder="Pesquisar livros"
         />
-        <font-awesome-icon class="test" icon="fa-solid fa-magnifying-glass" />
+        <!-- <font-awesome-icon class="test" icon="fa-solid fa-magnifying-glass" /> -->
       </div>
     </form>
   </div>
@@ -28,7 +28,7 @@ async function submit() {
 </script>
 
 <style lang="scss">
-.play-book-search {
+.play-books-search {
   display: flex;
   justify-content: center;
   width: 70%;
