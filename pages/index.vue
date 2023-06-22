@@ -1,10 +1,10 @@
 <template>
-  <section class="play-books-home">
+  <div class="play-books-home">
     <booksList v-if="bookStore.list.length" />
     <div v-else>
       <NoPageContent title="Você ainda não pesquisou livros" notfound="false" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">

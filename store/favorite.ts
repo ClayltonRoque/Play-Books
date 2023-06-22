@@ -1,11 +1,15 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
+import { useStorage } from '@vueuse/core'
 
 export interface StateProps {
   favoritesBooks: BookDocument.Volume[]
 }
 
 export const useFavoriteStore = defineStore('favorite', () => {
-  const favoriteBooks = ref([] as BookDocument.Volume[])
+  const favoriteBooks = useStorage(
+    'favoriteBooks',
+    ref([] as BookDocument.Volume[])
+  )
 
   function saveBook(payload: BookDocument.Volume) {
     favoriteBooks.value.push(payload)
@@ -16,7 +20,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
   }
 
   return {
-    favoriteBooks,
+    favoriteBooks: skipHydrate(favoriteBooks),
     saveBook,
     removeBook,
   }

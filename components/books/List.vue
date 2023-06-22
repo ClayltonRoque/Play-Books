@@ -1,6 +1,6 @@
 <template>
   <div class="play-books-list">
-    <div class="fb-list-of-book-wrapper" ref="scroller">
+    <div class="wrapper" ref="scroller">
       <div class="container">
         <div class="columns is-multiline align-items-full py-5">
           <div class="columns is-multiline align-items-full py-5">
@@ -27,10 +27,14 @@ const scroller = ref<HTMLElement | null>(null)
 
 const bookStore = useBookStore()
 
-useInfiniteScroll(scroller, onLoadMore, { distance: 10 })
+useInfiniteScroll(scroller, onLoadMore, { distance: 10, interval: 2000 })
 
 function onLoadMore() {
-  console.log('oi')
+  bookStore.params.startIndex += 20
+
+  const query = bookStore.params.query
+
+  bookStore.fetchBooks(query)
 }
 
 // const state = reactive({
@@ -85,8 +89,8 @@ function onLoadMore() {
 </script>
 
 <style lang="scss">
-.play-book-list {
-  &-wrapper {
+.play-books-list {
+  .wrapper {
     width: 100%;
     height: calc(100vh - #{$navbar-height});
     overflow-x: hidden;

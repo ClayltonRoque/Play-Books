@@ -1,4 +1,4 @@
-import { defineStore, skipHydrate } from 'pinia'
+import { defineStore } from 'pinia'
 import { useGoogleBooksAPI } from '~/service/useGoogleBooksAPI'
 
 interface Params {
@@ -8,6 +8,7 @@ interface Params {
 }
 
 export const useBookStore = defineStore('book', () => {
+  const books = ref<BookDocument.Volume[]>([])
   const list = ref<BookDocument.Volume[]>([])
   const params = ref<Params>({
     query: '',
@@ -27,15 +28,16 @@ export const useBookStore = defineStore('book', () => {
       paramsRef.maxResults,
       paramsRef.startIndex
     )
-
-    list.value = data.value.items
+    books.value = data.value.items
+    list.value.push(...books.value)
     totalBooks.value = data.value.totalItems
   }
 
   return {
-    list: skipHydrate(list),
-    params: skipHydrate(params),
-    totalBooks: skipHydrate(totalBooks),
+    books,
+    list,
+    params,
+    totalBooks,
     fetchBooks,
   }
 })
