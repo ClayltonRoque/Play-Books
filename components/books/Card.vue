@@ -4,20 +4,24 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <div :to="{ name: 'books-id', params: { id: props.book.id } }">
+            <div>
               <div v-if="loading">
                 <figure>
                   <img src="@/assets/img/no-image.png" />
                 </figure>
               </div>
               <div v-else>
-                <figure
-                  v-if="imageThumbnail && imageThumbnail.length"
-                  class="media"
-                  style="border-top: 0; padding-top: 0"
+                <NuxtLink
+                  :to="{ name: 'books-id', params: { id: props.book.id } }"
                 >
-                  <img :src="imageThumbnail" />
-                </figure>
+                  <figure
+                    v-if="imageThumbnail && imageThumbnail.length"
+                    class="media"
+                    style="border-top: 0; padding-top: 0"
+                  >
+                    <img :src="imageThumbnail" />
+                  </figure>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -69,7 +73,7 @@ const { imageThumbnail } = useVolume(props.book)
 const description = ref<HTMLElement>()
 
 const loading = ref(true)
-setTimeout(loadingEnd, 1000)
+setTimeout(loadingEnd, 500)
 
 function loadingEnd() {
   loading.value = false

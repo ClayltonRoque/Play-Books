@@ -10,7 +10,7 @@
         </button>
         <a
           class="preview has-text-brand-blue button-details preview is-size-6 is-uppercase"
-          :href="props.details.volumeInfo.previewLink"
+          :href="props.book.volumeInfo.previewLink"
           target="_blank"
         >
           preview
@@ -18,7 +18,7 @@
       </header>
       <header class="card-header mb-4">
         <p class="title is-size-3 has-text-base-title card-header-title px-0">
-          {{ props.details.volumeInfo.title }}
+          {{ props.book.volumeInfo.title }}
         </p>
       </header>
       <div class="media mt-5">
@@ -38,12 +38,12 @@
 
                 <div
                   v-if="
-                    props.details.volumeInfo.authors &&
-                    props.details.volumeInfo.authors.length
+                    props.book.volumeInfo.authors &&
+                    props.book.volumeInfo.authors.length
                   "
                   class="subtitle has-text-base-subtitle"
                 >
-                  <p>{{ props.details.volumeInfo.authors[0] }}</p>
+                  <p>{{ props.book.volumeInfo.authors[0] }}</p>
                 </div>
 
                 <p v-else class="subtitle has-text-base-subtitle">authors</p>
@@ -54,13 +54,13 @@
                 <p class="title is-size-5 has-text-base-title pb-2">Editora</p>
                 <div
                   v-if="
-                    props.details.volumeInfo.publisher &&
-                    props.details.volumeInfo.publisher.length
+                    props.book.volumeInfo.publisher &&
+                    props.book.volumeInfo.publisher.length
                   "
                   class="subtitle has-text-base-subtitle"
                 >
                   <p>
-                    {{ props.details.volumeInfo.publisher }}
+                    {{ props.book.volumeInfo.publisher }}
                   </p>
                 </div>
                 <p v-else class="subtitle has-text-base-subtitle">publisher</p>
@@ -73,12 +73,12 @@
                 </p>
                 <div
                   v-if="
-                    props.details.volumeInfo.categories &&
-                    props.details.volumeInfo.categories.length
+                    props.book.volumeInfo.categories &&
+                    props.book.volumeInfo.categories.length
                   "
                   class="subtitle has-text-base-subtitle"
                 >
-                  <p>{{ props.details.volumeInfo.categories[0] }}</p>
+                  <p>{{ props.book.volumeInfo.categories[0] }}</p>
                 </div>
                 <p v-else class="subtitle has-text-base-subtitle">categories</p>
               </div>
@@ -90,12 +90,12 @@
                 <p class="title is-size-5 has-text-base-title pb-2">Idioma</p>
                 <div
                   v-if="
-                    props.details.volumeInfo.language &&
-                    props.details.volumeInfo.language.length
+                    props.book.volumeInfo.language &&
+                    props.book.volumeInfo.language.length
                   "
                   class="subtitle has-text-base-subtitle"
                 >
-                  <p>{{ props.details.volumeInfo.language }}</p>
+                  <p>{{ props.book.volumeInfo.language }}</p>
                 </div>
                 <p v-else class="subtitle has-text-base-subtitle">language</p>
               </div>
@@ -107,12 +107,12 @@
                 </p>
                 <div
                   v-if="
-                    props.details.volumeInfo.publishedDate &&
-                    props.details.volumeInfo.publishedDate.length
+                    props.book.volumeInfo.publishedDate &&
+                    props.book.volumeInfo.publishedDate.length
                   "
                   class="subtitle has-text-base-subtitle"
                 >
-                  <p>{{ props.details.volumeInfo.publishedDate }}</p>
+                  <p>{{ props.book.volumeInfo.publishedDate }}</p>
                 </div>
                 <p v-else class="subtitle has-text-base-subtitle">
                   publisherDate
@@ -123,10 +123,10 @@
               <div class="content">
                 <p class="title is-size-5 has-text-base-title pb-2">Páginas</p>
                 <div
-                  v-if="props.details.volumeInfo.pageCount"
+                  v-if="props.book.volumeInfo.pageCount"
                   class="subtitle has-text-base-subtitle"
                 >
-                  <p>{{ props.details.volumeInfo.pageCount }}</p>
+                  <p>{{ props.book.volumeInfo.pageCount }}</p>
                 </div>
                 <p v-else class="subtitle has-text-base-subtitle">pageCount</p>
               </div>
@@ -135,10 +135,7 @@
         </div>
       </div>
       <div>
-        <!-- <FbButtonSaveBook
-          class="is-align-content-center is-size-6"
-          :book="props.details"
-        /> -->
+        <Books class="is-align-content-center is-size-6" :book="props.book" />
       </div>
     </div>
   </div>
@@ -152,13 +149,13 @@ const test = route.params
 console.log(test)
 
 const props = defineProps({
-  details: {
+  book: {
     type: Object as PropType<BookDocument.Volume>,
     required: true,
   },
 })
 
-const { imageThumbnail } = useVolume(props.details)
+const { imageThumbnail } = useVolume(props.book)
 
 function goToPrev() {
   navigateTo('/')

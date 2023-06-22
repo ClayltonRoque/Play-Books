@@ -1,9 +1,10 @@
 <template>
   <section class="play-books-details container">
     <div class="books-details-container px-5">
-      <div v-if="state.book">
-        <BooksCard :book="state.book" />
+      <div v-if="!pending && state.book">
+        <BooksDetails :book="state.book" />
       </div>
+
       <div class="details-content">
         <p
           class="title is-size-5 has-text-base-title pb-2"
@@ -14,12 +15,6 @@
           v-html="state.book?.volumeInfo.description"
         ></div>
       </div>
-    </div>
-    <div>
-      <NoPageContent
-        title="Página não encontrada, voltar para home!"
-        notfound="true"
-      />
     </div>
   </section>
 </template>
@@ -36,11 +31,13 @@ const state = reactive<StateProps>({
   book: null,
 })
 
-const { data } = useLazyFetch<BookDocument.Volume>(
+const { data, error, pending } = useLazyFetch<BookDocument.Volume | null>(
   `https://www.googleapis.com/books/v1/volumes/${params.id}`
 )
-
 state.book = data.value
+console.log(error.value)
+
+// state.book = data.value
 </script>
 
 <style lang="scss">
