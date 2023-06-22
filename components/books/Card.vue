@@ -5,16 +5,20 @@
         <div class="media">
           <div class="media-left">
             <div :to="{ name: 'books-id', params: { id: props.book.id } }">
-              <figure
-                v-if="imageThumbnail && imageThumbnail.length"
-                class="media"
-                style="border-top: 0; padding-top: 0"
-              >
-                <img :src="imageThumbnail" />
-              </figure>
-              <figure v-else>
-                <img src="@/assets/img/no-image.png" />
-              </figure>
+              <div v-if="loading">
+                <figure>
+                  <img src="@/assets/img/no-image.png" />
+                </figure>
+              </div>
+              <div v-else>
+                <figure
+                  v-if="imageThumbnail && imageThumbnail.length"
+                  class="media"
+                  style="border-top: 0; padding-top: 0"
+                >
+                  <img :src="imageThumbnail" />
+                </figure>
+              </div>
             </div>
           </div>
           <div class="media-content">
@@ -61,9 +65,15 @@ const props = defineProps({
     required: true,
   },
 })
-
 const { imageThumbnail } = useVolume(props.book)
 const description = ref<HTMLElement>()
+
+const loading = ref(true)
+setTimeout(loadingEnd, 1000)
+
+function loadingEnd() {
+  loading.value = false
+}
 </script>
 
 <style lang="scss">
