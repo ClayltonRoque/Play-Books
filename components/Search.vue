@@ -23,6 +23,9 @@ const state = reactive({
 const bookStore = useBookStore()
 
 async function submit() {
+  bookStore.params.maxResults = 20
+  bookStore.params.startIndex = 0
+  bookStore.list = []
   bookStore.fetchBooks(state.query)
 }
 </script>

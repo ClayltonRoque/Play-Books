@@ -1,8 +1,8 @@
-export function useVolume(volume: BookDocument.Volume) {
+export function useVolume(volume: BookDocument.Volume | null) {
   const imageThumbnail = computed(
     () =>
-      volume.volumeInfo?.imageLinks?.thumbnail &&
-      volume.volumeInfo?.imageLinks?.smallThumbnail
+      volume?.volumeInfo?.imageLinks?.thumbnail &&
+      volume?.volumeInfo?.imageLinks?.smallThumbnail
   )
 
   return {

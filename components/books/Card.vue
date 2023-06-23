@@ -5,12 +5,7 @@
         <div class="media">
           <div class="media-left">
             <div>
-              <div v-if="loading">
-                <figure>
-                  <img src="@/assets/img/no-image.png" />
-                </figure>
-              </div>
-              <div v-else>
+              <div v-if="props.book.volumeInfo.imageLinks">
                 <NuxtLink
                   :to="{ name: 'books-id', params: { id: props.book.id } }"
                 >
@@ -22,6 +17,11 @@
                     <img :src="imageThumbnail" />
                   </figure>
                 </NuxtLink>
+              </div>
+              <div v-else>
+                <figure>
+                  <img src="@/assets/img/no-image.png" />
+                </figure>
               </div>
             </div>
           </div>
@@ -40,16 +40,28 @@
                   {{ props.book.volumeInfo.authors[0] }}
                 </p>
               </div>
-              <p v-else class="subtitle subtitle-card has-text-base-subtitle">
-                Author
-              </p>
+              <div v-else>
+                <p class="subtitle subtitle-card has-text-base-subtitle">
+                  unknown
+                </p>
+              </div>
               <p
-                v-if="$props.book.volumeInfo.description"
+                v-if="props.book.volumeInfo.description"
                 ref="description"
                 key="description-card"
                 class="description description-card has-text-base-text is-size-6"
               >
                 {{ props.book.volumeInfo.description }}
+              </p>
+              <p
+                v-else
+                ref="description"
+                class="description description-card has-text-base-text is-size-6"
+              >
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Recusandae nostrum itaque porro, iste in et incidunt, maiores
+                quod earum corrupti fugiat consequatur assumenda quibusdam dicta
+                ratione ipsam, perferendis facere at!
               </p>
             </div>
           </div>
@@ -115,18 +127,20 @@ function loadingEnd() {
     -webkit-line-clamp: 2;
   }
   .subtitle-card {
+    overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     margin-bottom: auto;
   }
   .description-card {
-    height: fit-content;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    margin-bottom: auto;
   }
   .card {
     max-width: 392px;

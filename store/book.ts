@@ -12,7 +12,7 @@ export const useBookStore = defineStore('book', () => {
   const list = ref<BookDocument.Volume[]>([])
   const params = ref<Params>({
     query: '',
-    maxResults: 20,
+    maxResults: 40,
     startIndex: 0,
   })
   const totalBooks = ref(0)

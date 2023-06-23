@@ -1,18 +1,15 @@
 <template>
   <section class="play-books-details container">
-    <div class="books-details-container px-5">
-      <div v-if="!pending && state.book">
-        <BooksDetails :book="state.book" />
-      </div>
-
+    <div v-if="state.book" class="books-details-container px-5">
+      <BooksDetails :book="state.book" />
       <div class="details-content">
         <p
           class="title is-size-5 has-text-base-title pb-2"
-          v-html="state.book?.volumeInfo.title"
+          v-html="state.book.volumeInfo.title"
         ></p>
         <div
           class="subtitle has-text-base-subtitle"
-          v-html="state.book?.volumeInfo.description"
+          v-html="state.book.volumeInfo.description"
         ></div>
       </div>
     </div>
@@ -24,20 +21,17 @@ interface StateProps {
   book: BookDocument.Volume | null
 }
 const route = useRoute()
-
 const params = route.params
 
 const state = reactive<StateProps>({
   book: null,
 })
 
-const { data, error, pending } = useLazyFetch<BookDocument.Volume | null>(
+const { data } = await useFetch<BookDocument.Volume | null>(
   `https://www.googleapis.com/books/v1/volumes/${params.id}`
 )
-state.book = data.value
-console.log(error.value)
 
-// state.book = data.value
+state.book = data.value
 </script>
 
 <style lang="scss">
